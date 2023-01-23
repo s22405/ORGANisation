@@ -1,0 +1,55 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <script type="application/javascript" src="../../../public/js/validationCommon.js"></script>-->
+<!--    <script type="application/javascript" src="../../../public/js/validationDoctorForm.js"></script>-->
+<!--    <link rel="stylesheet" href="../../../public/css/style.css" />-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width,initial-scale=1"/>-->
+<!--    <title>NotAnOrganHarvestingOperation.INC</title>-->
+<!--</head>-->
+<!--<header>-->
+<!--    <h1>NotAnOrganHarvestingOperation.INC</h1>-->
+<!--    <img src="../../../public/images/rimworld_logo.png" alt="NotAnOrganHarvestingOperation.INC logo">-->
+<!--</header>-->
+<!--<nav>-->
+<!--    <ul>-->
+<!--        <li><a href="../../index.ejs">Home</a></li>-->
+<!--        <li><a href="list.ejs" class="active">Doctors</a></li>-->
+<!--        <li><a href="../operation/list.ejs">Operations</a></li>-->
+<!--        <li><a href="../willingOrganDonor/list.ejs">WillingOrganDonors</a></li>-->
+<!--        <li><a href="../organ/list.ejs">Organs</a></li>-->
+<!--    </ul>-->
+<!--</nav>-->
+
+<%- include('../../fragment/header.ejs') %>
+
+<main>
+    <h2>New Psychopath</h2>
+    <form class="form" novalidate onsubmit="return validateForm()">
+        <label for="Name">Name:  <span class="symbol-required">*</span></label>
+        <input type="text" name="Name" id="Name" placeholder="1-200 characters" class="error-input" required />
+        <span id="errorName" class="errors-text">Field is required</span>
+
+        <label for="DateJoin">DateJoin:  <span class="symbol-required">*</span></label>
+        <input type="date" name="DateJoin" id="DateJoin" class="error-input" required />
+        <span id="errorDateJoin" class="errors-text">Field is required</span>
+
+        <label for="DateLeave">DateLeave: </label>
+        <input type="date" name="DateLeave" id="DateLeave" class="error-input" />
+        <span id="errorDateLeave" class="errors-text">Uhhhh what</span>
+
+        <div class="form-buttons">
+            <p id="errorsSummary" class="errors-text">Form has errors</p>
+            <input type="submit" value="Submit" class="form-button-submit"/>
+            <a href="list.ejs" class="form-button-cancel">Cancel</a>
+        </div>
+    </form>
+</main>
+
+<%- include('../../fragment/footer.ejs') %>
+
+<!--<footer>-->
+<!--    Maciej Czupyt s22405-->
+<!--</footer>-->
+<!--</html>-->

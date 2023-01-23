@@ -1,0 +1,49 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <script type="application/javascript" src="../../../public/js/validationCommon.js"></script>-->
+<!--    <link rel="stylesheet" href="../../../public/css/style.css" />-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width,initial-scale=1"/>-->
+<!--    <title>NotAnOrganHarvestingOperation.INC</title>-->
+<!--</head>-->
+<!--<header>-->
+<!--    <h1>NotAnOrganHarvestingOperation.INC</h1>-->
+<!--    <img src="../../../public/images/rimworld_logo.png" alt="NotAnOrganHarvestingOperation.INC logo">-->
+<!--</header>-->
+<!--<nav>-->
+<!--    <ul>-->
+<!--        <li><a href="../../index.ejs">Home</a></li>-->
+<!--        <li><a href="../doctor/list.ejs">Doctors</a></li>-->
+<!--        <li><a href="../operation/list.ejs">Operations</a></li>-->
+<!--        <li><a href="../willingOrganDonor/list.ejs">WillingOrganDonors</a></li>-->
+<!--        <li><a href="list.ejs" class="active">Organs</a></li>-->
+<!--    </ul>-->
+<!--</nav>-->
+<%- include('../../fragment/header.ejs') %>
+
+<main>
+    <h2>New Organ</h2>
+    <form class="form">
+        <label for="Name">Name:  <span class="symbol-required">*</span></label>
+        <input type="text" name="Name" id="Name" class="error-input" placeholder="1-200 characters" required />
+        <span id="errorName" class="errors-text">Field is required</span>
+
+        <label for="Price">Price:  <span class="symbol-required">*</span></label>
+        <input type="number" step="0.01" name="Price" id="Price" min="0" max="99999.99" class="error-input" placeholder="0-99999.99" required />
+        <span id="errorPrice" class="errors-text">Field is required</span>
+
+        <div class="form-buttons">
+            <p id="errorsSummary" class="errors-text">Form contains errors</p>
+            <input type="submit" value="Submit" class="form-button-submit" />
+            <a href="list.ejs" class="form-button-cancel">Cancel</a>
+        </div>
+
+    </form>
+</main>
+
+<%- include('../../fragment/footer.ejs') %>
+<!--<footer>-->
+<!--    Maciej Czupyt s22405-->
+<!--</footer>-->
+<!--</html>-->

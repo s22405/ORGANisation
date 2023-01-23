@@ -7,3 +7,6 @@ exports.showAddOperationForm = (req, res, next) => {
 exports.showOperationDetails = (req, res, next) => {
     res.render('pages/operation/form-details', {navLocation: 'Operations'});
 }
+exports.showEditOperationForm = (req, res, next) => {
+    res.render('pages/operation/form-edit', {navLocation: 'Operations'});
+}

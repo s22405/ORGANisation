@@ -7,3 +7,6 @@ exports.showAddWillingOrganDonorForm = (req, res, next) => {
 exports.showWillingOrganDonorDetails = (req, res, next) => {
     res.render('pages/willingOrganDonor/form-details', {navLocation: 'WillingOrganDonors'});
 }
+exports.showEditWillingOrganDonorForm = (req, res, next) => {
+    res.render('pages/willingOrganDonor/form-edit', {navLocation: 'WillingOrganDonors'});
+}

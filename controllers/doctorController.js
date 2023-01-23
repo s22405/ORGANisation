@@ -7,3 +7,6 @@ exports.showAddDoctorForm = (req, res, next) => {
 exports.showDoctorDetails = (req, res, next) => {
     res.render('pages/doctor/form-details', {navLocation: 'Doctors'});
 }
+exports.showEditDoctorForm = (req, res, next) => {
+    res.render('pages/doctor/form-edit', {navLocation: 'Doctors'});
+}

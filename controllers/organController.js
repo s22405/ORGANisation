@@ -7,3 +7,6 @@ exports.showAddOrganForm = (req, res, next) => {
 exports.showOrganDetails = (req, res, next) => {
     res.render('pages/organ/form-details', {navLocation: 'Organs'});
 }
+exports.showEditOrganForm = (req, res, next) => {
+    res.render('pages/organ/form-edit', {navLocation: 'Organs'});
+}

@@ -4,8 +4,12 @@ const doctorController = require('../controllers/doctorController');
 
 router.get('/', doctorController.showDoctorList);
 router.get('/add', doctorController.showAddDoctorForm);
-router.get('/details/:doctorId', doctorController.showDoctorDetails); //TODO doctorId uncalled?
-router.get('/edit/:doctorId', doctorController.showEditDoctorForm); //TODO doctorId uncalled?
+router.get('/edit/:idDoctor', doctorController.showEditDoctorForm);
+router.get('/details/:idDoctor', doctorController.showDoctorDetails);
+
+router.post('/add', doctorController.addDoctor);
+router.post('/edit', doctorController.updateDoctor);
+router.get('/delete/:idDoctor', doctorController.deleteDoctor);
 
 module.exports = router;
 

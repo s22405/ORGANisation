@@ -27,33 +27,49 @@
     <table class="table-list">
         <thead>
             <tr>
-                <th>Id</th>
+<!--                <th>Id</th>-->
                 <th>Name</th>
                 <th>DateJoin</th>
                 <th>DateLeave</th>
                 <th>Actions</th>
             </tr>
         </thead>
+<!--        <tbody>-->
+<!--            <tr>-->
+<!--                <td>1</td>-->
+<!--                <td>Barry The Chopper</td>-->
+<!--                <td>01 April 5500</td>-->
+<!--                <td>Null</td>-->
+<!--                <td>-->
+<!--                    <ul class="list-actions">-->
+<!--                        <li>-->
+<!--                            <a href="/doctors/details/1" class="list-actions-button-details">Details</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="/doctors/edit/1" class="list-actions-button-edit">Edit</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="https://www.youtube.com/watch?v=qOb-Ha7UaEw" class="list-actions-button-delete">Delete</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--        </tbody>-->
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Barry The Chopper</td>
-                <td>01 April 5500</td>
-                <td>Null</td>
-                <td>
-                    <ul class="list-actions">
-                        <li>
-                            <a href="/doctors/details/1" class="list-actions-button-details">Details</a>
-                        </li>
-                        <li>
-                            <a href="/doctors/edit/1" class="list-actions-button-edit">Edit</a>
-                        </li>
-                        <li>
-                            <a href="https://www.youtube.com/watch?v=qOb-Ha7UaEw" class="list-actions-button-delete">Delete</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+            <% for (let doctor of doctors) { %>
+                <tr>
+                    <td><%= doctor.name %></td>
+                    <td><%= doctor.dateJoin.toISOString().split('T')[0] %></td>
+                    <td><%= doctor.dateLeave ? doctor.toISOString().split('T')[0] : '' %></td>
+                    <td>
+                        <ul class="list-actions">
+                            <li><a href="/doctors/details/<%=doctor._id%>" class="list-actions-button-details">Details</a></li>
+                            <li><a href="/doctors/edit/<%=doctor._id %>" class="list-actions-button-edit">Edit</a></li>
+                            <li><a href="/doctors/delete/<%=doctor._id %>" class="list-actions-button-delete">Delete</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            <% } %>
         </tbody>
     </table>
     <p><a href="/doctors/add" class="button-add">Add a new psychopath</a></p>

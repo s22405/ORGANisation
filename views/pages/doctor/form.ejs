@@ -25,27 +25,69 @@
 <%- include('../../fragment/header.ejs') %>
 
 <main>
-    <h2>New Psychopath</h2>
-    <form class="form" novalidate onsubmit="return validateForm()">
-        <label for="Name">Name:  <span class="symbol-required">*</span></label>
-        <input type="text" name="Name" id="Name" placeholder="1-200 characters" required />
+    <script type="application/javascript" src="/js/validationDoctorForm.js"></script>
+    <h2><%= pageTitle %></h2>
+    <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm();">
+        <input type="hidden" name="_id" value="<%= doctor._id %>">
+
+        <label for="Name">Name:  <span class="symbol-required">*</span></label> <!--TODO oh my fucking god I wrote "Name" instead of "name" and I don't know if it'll have consequences-->
+        <input type="text" name="Name" id="Name" placeholder="1-200 characters" value="<%= doctor.name %>"
+        <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
         <span id="errorName" class="errors-text"></span>
 
         <label for="DateJoin">DateJoin:  <span class="symbol-required">*</span></label>
-        <input type="date" name="DateJoin" id="DateJoin" required />
+        <input type="date" name="DateJoin" id="DateJoin" value="<%= doctor.dateJoin %>"
+        <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
         <span id="errorDateJoin" class="errors-text"></span>
 
         <label for="DateLeave">DateLeave: </label>
-        <input type="date" name="DateLeave" id="DateLeave" />
+        <input type="date" name="DateLeave" id="DateLeave" value="<%= doctor.dateLeave %>"
+        <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
         <span id="errorDateLeave" class="errors-text"></span>
 
-        <div class="form-buttons">
-            <p id="errorsSummary" class="errors-text"></p>
-            <input type="submit" value="Submit" class="form-button-submit" />
-            <a href="/doctors" class="form-button-cancel">Cancel</a>
-        </div>
-
+        <% if(formMode == 'showDetails') { %>
+            <div class="form-buttons"> <!-- TODO "selection-buttons in the tutorial" -->
+                <a href="/doctors/edit/<%= doctor._id %>" class="form-button-edit">Edit</a>
+            </div>
+        <% } %>
     </form>
+
+    <% if(formMode == 'showDetails' || formMode == 'edit') { %>
+        <h2>Operation Details</h2>
+        <table class="table-list">
+            <thead>
+                <tr>
+                    <th>WillingOrganDonor</th>
+                    <th>Organ</th>
+                    <th>Successful?</th>
+                    <th>BedNumber</th>
+                    <th>OperationTimestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% for (let o of doctor.operations) { %> <!-- TODO might've fucked the variable names here -->
+                <tr>
+                    <td><a href="/willingOrganDonors/details/<%= o.willingOrganDonor._id %>"><%= o.willingOrganDonor.name %></a></td>
+                    <td><a href="/organs/details/<%= o.organ._id %>"><%= o.organ.name %></a></td>
+                    <td><%= o.successful %></td>
+                    <td><%= o.bedNumber %></td>
+                    <td><%= o.operationTimestamp.toISOString().split('T')[0] %></td>
+                </tr>
+            <% } %>
+            </tbody>
+        </table>
+    <% } %>
+
+    <div class="form-buttons">
+        <p id="errorsSummary" class="errors-text"></p>
+        <% if (formMode != 'showDetails') { %>
+            <input class="form-button-submit" type="submit" value="<%=btnLabel%>"  />
+            <a class="form-button-cancel" href="/doctors">Cancel</a>
+        <% } else { %>
+            <a class="form-button-cancel" href="/doctors">Return</a>
+        <% } %>
+    </div>
+
 </main>
 
 <%- include('../../fragment/footer.ejs') %>

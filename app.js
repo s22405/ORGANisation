@@ -9,6 +9,11 @@ const doctorRouter = require('./routes/doctorRoute');
 const operationRouter = require('./routes/operationRoute');
 const willingOrganDonorRouter = require('./routes/willingOrganDonorRoute');
 const organRouter = require('./routes/organRoute');
+const doctorApiRouter = require('./routes/api/DoctorApiRoute');
+const organApiRouter = require('./routes/api/OrganApiRoute');
+const willingOrganDonorApiRouter = require('./routes/api/WillingOrganDonorApiRoute');
+const operationApiRouter = require('./routes/api/OperationApiRoute');
+
 
 var app = express();
 
@@ -27,6 +32,11 @@ app.use('/doctors', doctorRouter);
 app.use('/operations', operationRouter);
 app.use('/willingOrganDonors', willingOrganDonorRouter);
 app.use('/organs', organRouter);
+
+app.use('/api/doctors', doctorApiRouter); //TODO /api/doctors ?
+app.use('/api/organs', organApiRouter); //TODO /api/doctors ?
+app.use('/api/willingOrganDonors', willingOrganDonorApiRouter); //TODO /api/doctors ?
+app.use('/api/operations', operationApiRouter); //TODO /api/doctors ?
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -49,14 +59,5 @@ sequelizeInit()
     .catch(error => {
       console.log(error);
     });
-
-const doctorApiRouter = require('./routes/api/DoctorApiRoute');
-const organApiRouter = require('./routes/api/OrganApiRoute');
-const willingOrganDonorApiRouter = require('./routes/api/WillingOrganDonorApiRoute');
-const operationApiRouter = require('./routes/api/OperationApiRoute');
-app.use('/api/doctors', doctorApiRouter); //TODO /api/doctors ?
-app.use('/api/organs', organApiRouter); //TODO /api/doctors ?
-app.use('/api/willingOrganDonors', willingOrganDonorApiRouter); //TODO /api/doctors ?
-app.use('/api/operations', operationApiRouter); //TODO /api/doctors ?
 
 module.exports = app;

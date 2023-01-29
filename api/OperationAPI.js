@@ -1,7 +1,7 @@
-const OperationRepository = require('../repository/mysql2/OperationRepository');
+const OperationRepository = require('../repository/sequelize/OperationRepository');
 
 exports.getOperations = (req, res, next) => {
-    OperationReporsitory.getOperations()
+    OperationRepository.getOperations()
         .then(operations => {
             res.status(200).json(operations);
         })

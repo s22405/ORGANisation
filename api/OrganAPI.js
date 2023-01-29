@@ -1,7 +1,7 @@
-const OrganRepository = require('../repository/mysql2/OrganRepository');
+const OrganRepository = require('../repository/sequelize/OrganRepository');
 
 exports.getOrgans = (req, res, next) => {
-    OrganReporsitory.getOrgans()
+    OrganRepository.getOrgans()
         .then(organs => {
             res.status(200).json(organs);
         })

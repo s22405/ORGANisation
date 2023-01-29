@@ -1,4 +1,4 @@
-const DoctorRepository = require('../repository/mysql2/DoctorRepository');
+const DoctorRepository = require('../repository/sequelize/DoctorRepository');
 
 exports.getDoctors = (req, res, next) => {
     DoctorRepository.getDoctors()

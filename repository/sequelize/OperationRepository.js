@@ -17,7 +17,7 @@ exports.getOperations = () => {
             },
             {
                 model: WillingOrganDonor,
-                as: 'willingOrganDonors'
+                as: 'willingOrganDonor'
             }]
     });
 };
@@ -34,7 +34,7 @@ exports.getOperationById = (idOperation) => {
             },
             {
                 model: WillingOrganDonor,
-                as: 'willingOrganDonors'
+                as: 'willingOrganDonor'
             }]
         });
 };

@@ -7,45 +7,49 @@
         <input type="hidden" name="_id" value="<%= operation._id %>">
 
         <label for="willingOrganDonor">WillingOrganDonor: <span class="symbol-required">*</span></label>
-        <select name="willingOrganDonor" id="willingOrganDonor"
+        <select name="idWillingOrganDonor" id="idWillingOrganDonor"
         <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
             <option value="">-- Choose WillingOrganDonor --</option>
             <% for(let i=0; i<allWillingOrganDonors.length; i++) { let willingOrganDonor = allWillingOrganDonors[i]; %>
-                <option value="<%= willingOrganDonor._id %>" label="<%= willingOrganDonor.name%>"
-                    <%= (operation._id && willingOrganDonor._id.toString() == operation.idWillingOrganDonor.toString()) ? 'selected' : ''%>
-                ></option>
+                <option value="<%=willingOrganDonor._id%>" label="<%= willingOrganDonor.name%>"<%= (operation._id && willingOrganDonor._id.toString() == operation.willingOrganDonor._id.toString()) ? 'selected' : ''%>></option>
             <% } %>
         </select>
         <span id="errorWillingOrganDonor" class="errors-text"></span>
 
         <label for="doctor">Doctor: <span class="symbol-required">*</span></label>
-        <select name="doctor" id="doctor"
+        <select name="idDoctor" id="idDoctor"
         <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
             <option value="">-- Choose Doctor --</option>
             <% for(let i=0; i<allDoctors.length; i++) { let doctor = allDoctors[i]; %>
-            <option value="<%= doctor._id %>" label="<%= doctor.name%>"
-                <%= (operation._id && doctor._id.toString() == operation.idDoctor.toString()) ? 'selected' : ''%>
-            ></option>
+                <option value="<%=doctor._id%>" label="<%= doctor.name%>"<%= (operation._id && doctor._id.toString() == operation.doctor._id.toString()) ? 'selected' : ''%>></option>
             <% } %>
         </select>
         <span id="errorDoctor" class="errors-text"></span>
 
         <label for="organ">Organ: <span class="symbol-required">*</span></label>
-        <select name="organ" id="organ"
+        <select name="idOrgan" id="idOrgan"
         <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
             <option value="">-- Choose Organ --</option>
             <% for(let i=0; i<allOrgans.length; i++) { let organ = allOrgans[i]; %>
-            <option value="<%= organ._id %>" label="<%= organ.name%>"
-                <%= (operation._id && organ._id.toString() == operation.idOrgan.toString()) ? 'selected' : ''%>
-            ></option>
+            <option value="<%=organ._id%>" label="<%= organ.name%>" <%= (operation._id && organ._id.toString() == operation.organ._id.toString()) ? 'selected' : ''%>></option>
             <% } %>
         </select>
         <span id="errorOrgan" class="errors-text"></span>
 
         <label for="successful">Successful: </label>
-        <input type="checkbox" name="successful" id="successful" <%= operation.successful ? 'checked' : '' %>
-        <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
+        <select name="successful" id="successful"
+        <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select>
         <span id="errorSuccessful" class="errors-text"></span>
+
+        <!--        Roses are red, violets are blue, checkboxes are fucking cursed-->
+        <!--        <label for="successful">Successful: </label>-->
+        <!--        <input type="checkbox" name="successful" id="successful" true-value="true" false-value="false"-->
+        <!--         //operation.successful ? 'checked' : '' -->
+        <!--         //(formMode == 'showDetails') ? 'disabled' : '>/>-->
+        <!--        <span id="errorSuccessful" class="errors-text"></span>-->
 
         <label for="bedNumber">BedNumber:  <span class="symbol-required">*</span></label>
         <input type="number" name="bedNumber" id="bedNumber" min="1" max="99" placeholder="1-99" value="<%= operation.bedNumber %>"
@@ -60,7 +64,7 @@
 
         <% if(formMode == 'showDetails') { %>
             <div class="form-buttons"> <!-- labeled as "selection-buttons in the tutorial" -->
-                <a href="/operations/edit/<%= operation._id %>" class="form-button-edit">Edit</a>
+                <a href="/operations/edit/<%=operation._id%>" class="form-button-edit">Edit</a>
             </div>
         <% } %>
 

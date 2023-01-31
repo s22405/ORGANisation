@@ -10,11 +10,25 @@ const Organ = sequelize.define('Organ', {
     },
     name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true,
+        validate: {
+            notEmpty: true,
+            len: {
+                args: [1, 200],
+                msg: "The field should contain between 1 and 200 characters"
+            },
+        }
     },
     price: {
         type: Sequelize.DECIMAL(10,2),
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            min: 0,
+            max: 99999.99,
+            //TODO isfloat?
+        }
     }
 });
 

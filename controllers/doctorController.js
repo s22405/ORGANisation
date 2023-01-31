@@ -5,7 +5,8 @@ exports.showDoctorList = (req, res, next) => {
         .then(doctors => {
             res.render('pages/doctor/list', {
                 doctors: doctors,
-                navLocation: 'Doctors'
+                navLocation: 'Doctors',
+                validationErrors: []
             });
         });
     // res.render('pages/doctor/list', {navLocation: 'Doctors'});
@@ -17,7 +18,8 @@ exports.showAddDoctorForm = (req, res, next) => {
         formMode: 'createNew',
         btnLabel: 'Add doctor',
         formAction: '/doctors/add',
-        navLocation: 'Doctors'
+        navLocation: 'Doctors',
+        validationErrors: []
     });
     // res.render('pages/doctor/form', {navLocation: 'Doctors'});
 }
@@ -32,7 +34,8 @@ exports.showEditDoctorForm = (req, res, next) => {
                 formMode: 'edit',
                 btnLabel: 'Edit doctor',
                 formAction: '/doctors/edit',
-                navLocation: 'Doctors'
+                navLocation: 'Doctors',
+                validationErrors: []
             });
         });
     // res.render('pages/doctor/form-edit', {navLocation: 'Doctors'});
@@ -48,7 +51,8 @@ exports.showDoctorDetails = (req, res, next) => {
                 formMode: 'showDetails',
                 // btnLabel: 'Edit doctor',
                 formAction: '',
-                navLocation: 'Doctors'
+                navLocation: 'Doctors',
+                validationErrors: []
             });
         });
     // res.render('pages/doctor/form-details', {navLocation: 'Doctors'});
@@ -59,14 +63,37 @@ exports.addDoctor = (req, res, next) => {
     DoctorRepository.createDoctor(doctorData)
         .then( result => {
             res.redirect('/doctors');
+        })
+        .catch(err => {
+                res.render('pages/doctor/form', {
+                doctor: doctorData,
+                pageTitle: 'Add doctor',
+                formMode: 'createNew',
+                btnLabel: 'Add doctor',
+                formAction: '/doctors/add',
+                navLocation: 'Doctors',
+                validationErrors: err.errors
+            });
         });
 };
+
 exports.updateDoctor = (req, res, next) => {
     const idDoctor = req.body._id;
     const doctorData = {...req.body};
     DoctorRepository.updateDoctor(idDoctor, doctorData)
         .then( result => {
             res.redirect('/doctors');
+        })
+        .catch(err => {
+            res.render('pages/doctor/form', {
+                doctor: doctorData,
+                pageTitle: 'Edit doctor',
+                formMode: 'edit',
+                btnLabel: 'Edit doctor',
+                formAction: '/doctors/edit',
+                navLocation: 'Doctors',
+                validationErrors: err.errors
+            });
         });
 };
 exports.deleteDoctor = (req, res, next) => {

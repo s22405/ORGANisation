@@ -7,44 +7,60 @@
         <input type="hidden" name="_id" value="<%= operation._id %>">
 
         <label for="willingOrganDonor">WillingOrganDonor: <span class="symbol-required">*</span></label>
-        <select name="idWillingOrganDonor" id="idWillingOrganDonor"
+        <select name="idWillingOrganDonor" id="idWillingOrganDonor" class="<%= validationErrors.find(err => err.path.includes('idWillingOrganDonor')) ? 'error-input' : '' %>"
         <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
             <option value="">-- Choose WillingOrganDonor --</option>
             <% for(let i=0; i<allWillingOrganDonors.length; i++) { let willingOrganDonor = allWillingOrganDonors[i]; %>
                 <option value="<%=willingOrganDonor._id%>" label="<%= willingOrganDonor.name%>"<%= (operation._id && willingOrganDonor._id.toString() == operation.willingOrganDonor._id.toString()) ? 'selected' : ''%>></option>
             <% } %>
         </select>
-        <span id="errorWillingOrganDonor" class="errors-text"></span>
+        <span id="errorWillingOrganDonor" class="errors-text">
+            <% if (validationErrors.find(err => err.path.includes('idWillingOrganDonor'))) { %>
+                <%= validationErrors.find(err => err.path.includes('idWillingOrganDonor')).message %>
+            <% } %>
+        </span>
 
         <label for="doctor">Doctor: <span class="symbol-required">*</span></label>
-        <select name="idDoctor" id="idDoctor"
+        <select name="idDoctor" id="idDoctor" class="<%= validationErrors.find(err => err.path.includes('idDoctor')) ? 'error-input' : '' %>"
         <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
             <option value="">-- Choose Doctor --</option>
             <% for(let i=0; i<allDoctors.length; i++) { let doctor = allDoctors[i]; %>
                 <option value="<%=doctor._id%>" label="<%= doctor.name%>"<%= (operation._id && doctor._id.toString() == operation.doctor._id.toString()) ? 'selected' : ''%>></option>
             <% } %>
         </select>
-        <span id="errorDoctor" class="errors-text"></span>
+        <span id="errorDoctor" class="errors-text">
+            <% if (validationErrors.find(err => err.path.includes('idDoctor'))) { %>
+                <%= validationErrors.find(err => err.path.includes('idDoctor')).message %>
+            <% } %>
+        </span>
 
         <label for="organ">Organ: <span class="symbol-required">*</span></label>
-        <select name="idOrgan" id="idOrgan"
+        <select name="idOrgan" id="idOrgan" class="<%= validationErrors.find(err => err.path.includes('idOrgan')) ? 'error-input' : '' %>"
         <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
             <option value="">-- Choose Organ --</option>
             <% for(let i=0; i<allOrgans.length; i++) { let organ = allOrgans[i]; %>
             <option value="<%=organ._id%>" label="<%= organ.name%>" <%= (operation._id && organ._id.toString() == operation.organ._id.toString()) ? 'selected' : ''%>></option>
             <% } %>
         </select>
-        <span id="errorOrgan" class="errors-text"></span>
+        <span id="errorOrgan" class="errors-text">
+            <% if (validationErrors.find(err => err.path.includes('idOrgan'))) { %>
+                <%= validationErrors.find(err => err.path.includes('idOrgan')).message %>
+            <% } %>
+        </span>
 
         <label for="successful">Successful: </label>
-        <select name="successful" id="successful"
+        <select name="successful" id="successful" class="<%= validationErrors.find(err => err.path.includes('successful')) ? 'error-input' : '' %>"
         <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
             <option value="true">True</option>
             <option value="false">False</option>
         </select>
-        <span id="errorSuccessful" class="errors-text"></span>
+        <span id="errorSuccessful" class="errors-text">
+            <% if (validationErrors.find(err => err.path.includes('successful'))) { %>
+                <%= validationErrors.find(err => err.path.includes('successful')).message %>
+            <% } %>
+        </span>
 
-        <!--        Roses are red, violets are blue, checkboxes are fucking cursed-->
+        <!--        Roses are red, violets are blue, checkboxes are cursed, fuck-->
         <!--        <label for="successful">Successful: </label>-->
         <!--        <input type="checkbox" name="successful" id="successful" true-value="true" false-value="false"-->
         <!--         //operation.successful ? 'checked' : '' -->
@@ -52,15 +68,27 @@
         <!--        <span id="errorSuccessful" class="errors-text"></span>-->
 
         <label for="bedNumber">BedNumber:  <span class="symbol-required">*</span></label>
-        <input type="number" name="bedNumber" id="bedNumber" min="1" max="99" placeholder="1-99" value="<%= operation.bedNumber %>"
+        <input type="number" name="bedNumber" id="bedNumber" min="1" max="99" class="<%= validationErrors.find(err => err.path.includes('bedNumber')) ? 'error-input' : '' %>"
+        placeholder="1-99" value="<%= operation.bedNumber %>"
         <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
-        <span id="errorBedNumber" class="errors-text"></span>
+        <span id="errorBedNumber" class="errors-text">
+            <% if (validationErrors.find(err => err.path.includes('bedNumber'))) { %>
+                <%= validationErrors.find(err => err.path.includes('bedNumber')).message %>
+            <% } %>
+        </span>
 
         <label for="operationTimestamp">OperationTimestamp:  <span class="symbol-required">*</span></label>
-        <input type="date" name="operationTimestamp" id="operationTimestamp" value=
-        "<%= operation.operationTimestamp ? operation.operationTimestamp.toISOString().split('T')[0] : '' %>"
-        <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
-        <span id="errorOperationTimestamp" class="errors-text"></span>
+        <%if (formMode == 'createNew') { %>
+            <input type="date" name="operationTimestamp" id="operationTimestamp" class="<%= validationErrors.find(err => err.path.includes('operationTimestamp')) ? 'error-input' : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
+        <%} else {%>
+            <input type="date" name="operationTimestamp" id="operationTimestamp" class="<%= validationErrors.find(err => err.path.includes('operationTimestamp')) ? 'error-input' : '' %>" value="<%= operation.operationTimestamp ? operation.operationTimestamp.toISOString().split('T')[0] : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
+        <%}%>
+
+        <span id="errorOperationTimestamp" class="errors-text">
+            <% if (validationErrors.find(err => err.path.includes('operationTimestamp'))) { %>
+                <%= validationErrors.find(err => err.path.includes('operationTimestamp')).message %>
+            <% } %>
+        </span>
 
         <% if(formMode == 'showDetails') { %>
             <div class="form-buttons"> <!-- labeled as "selection-buttons in the tutorial" -->

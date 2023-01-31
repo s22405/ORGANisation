@@ -7,14 +7,24 @@
         <input type="hidden" name="_id" value="<%= organ._id %>">
 
         <label for="name">Name: <span class="symbol-required">*</span></label>
-        <input type="text" name="name" id="name" placeholder="1-200 characters" value="<%= organ.name %>"
+        <input type="text" name="name" id="name" class="<%= validationErrors.find(err => err.path.includes('name')) ? 'error-input' : '' %>"
+               placeholder="1-200 characters" value="<%= organ.name %>"
         <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
-        <span id="errorName" class="errors-text"></span>
+        <span id="errorName" class="errors-text">
+            <% if (validationErrors.find(err => err.path.includes('name'))) { %>
+                <%= validationErrors.find(err => err.path.includes('name')).message %>
+            <% } %>
+        </span>
 
         <label for="price">Price:  <span class="symbol-required">*</span></label>
-        <input type="number" step="0.01" name="price" id="price" min="0" max="99999.99" placeholder="0-99999.99" value="<%= organ.price %>"
+        <input type="number" step="0.01" name="price" id="price" class="<%= validationErrors.find(err => err.path.includes('price')) ? 'error-input' : '' %>"
+               min="0" max="99999.99" placeholder="0-99999.99" value="<%= organ.price %>"
         <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
-        <span id="errorPrice" class="errors-text"></span>
+        <span id="errorPrice" class="errors-text">
+            <% if (validationErrors.find(err => err.path.includes('price'))) { %>
+                <%= validationErrors.find(err => err.path.includes('price')).message %>
+            <% } %>
+        </span>
 
         <% if(formMode == 'showDetails') { %>
             <div class="form-buttons"> <!-- labeled as "selection-buttons in the tutorial" -->

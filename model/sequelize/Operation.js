@@ -10,27 +10,53 @@ const Operation = sequelize.define('Operation', {
     },
     idWillingOrganDonor: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            isInt: true,
+        }
     },
     idDoctor: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            isInt: true,
+        }
     },
     idOrgan: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            isInt: true
+        }
     },
     successful: {
         type: Sequelize.BOOLEAN,
-        allowNull: false
+        allowNull: false,
     },
     bedNumber: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            isInt: true,
+            min: 1,
+            max: 99,
+        }
     },
     operationTimestamp: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            isDate: true,
+            notEmpty: true,
+            isAfter: { //TODO double check that this works
+                args: "5500-04-05",
+                msg: "DateJoin cannot happen before landing date (5500-04-05)"
+            }
+        }
     }
 });
 

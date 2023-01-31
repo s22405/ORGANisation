@@ -8,7 +8,8 @@ exports.showOperationList = (req, res, next) => {
         .then(operations => {
             res.render('pages/operation/list', {
                 operations: operations,
-                navLocation: 'Operations'
+                navLocation: 'Operations',
+                validationErrors: []
             });
         });
     // res.render('pages/operation/list', {navLocation: 'Operations'});
@@ -41,7 +42,8 @@ exports.showAddOperationForm = (req, res, next) => {
                 pageTitle: 'New operation',
                 btnLabel: 'New operation',
                 formAction: '/operations/add',
-                navLocation: 'Operations'
+                navLocation: 'Operations',
+                validationErrors: []
             });
         });
 }
@@ -75,7 +77,8 @@ exports.showEditOperationForm = (req, res, next) => {
                 pageTitle: 'Edit operation',
                 btnLabel: 'Edit operation',
                 formAction: '/operations/edit',
-                navLocation: 'Operations'
+                navLocation: 'Operations',
+                validationErrors: []
             });
         });
 }
@@ -109,7 +112,8 @@ exports.showOperationDetails = (req, res, next) => {
                 pageTitle: 'Operation details',
                 // btnLabel: 'Edit operation',
                 formAction: '',
-                navLocation: 'Operations'
+                navLocation: 'Operations',
+                validationErrors: []
             });
         });
 }
@@ -118,6 +122,17 @@ exports.addOperation = (req, res, next) => {
     OperationRepository.createOperation(operationData)
         .then( result => {
             res.redirect('/operations');
+        })
+        .catch(err => {
+            res.render('pages/operation/form', {
+                operation: operationData,
+                pageTitle: 'Add operation',
+                formMode: 'createNew',
+                btnLabel: 'Add operation',
+                formAction: '/operations/add',
+                navLocation: 'Operations',
+                validationErrors: err.errors
+            });
         });
 };
 exports.updateOperation = (req, res, next) => {
@@ -126,6 +141,17 @@ exports.updateOperation = (req, res, next) => {
     OperationRepository.updateOperation(idOperation, operationData)
         .then( result => {
             res.redirect('/operations');
+        })
+        .catch(err => {
+            res.render('pages/operation/form', {
+                operation: operationData,
+                pageTitle: 'Edit operation',
+                formMode: 'edit',
+                btnLabel: 'Edit operation',
+                formAction: '/operations/edit',
+                navLocation: 'Operations',
+                validationErrors: err.errors
+            });
         });
 };
 exports.deleteOperation = (req, res, next) => {

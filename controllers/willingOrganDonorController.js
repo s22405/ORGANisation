@@ -5,7 +5,8 @@ exports.showWillingOrganDonorList = (req, res, next) => {
         .then(willingOrganDonors => {
             res.render('pages/willingOrganDonor/list', {
                 willingOrganDonors: willingOrganDonors,
-                navLocation: 'WillingOrganDonors'
+                navLocation: 'WillingOrganDonors',
+                validationErrors: []
             });
         });
     // res.render('pages/willingOrganDonor/list', {navLocation: 'WillingOrganDonors'});
@@ -17,7 +18,8 @@ exports.showAddWillingOrganDonorForm = (req, res, next) => {
         formMode: 'createNew',
         btnLabel: 'Add willingOrganDonor',
         formAction: '/willingOrganDonors/add',
-        navLocation: 'WillingOrganDonors'
+        navLocation: 'WillingOrganDonors',
+        validationErrors: []
     });
     // res.render('pages/willingOrganDonor/form', {navLocation: 'WillingOrganDonors'});
 }
@@ -32,7 +34,8 @@ exports.showEditWillingOrganDonorForm = (req, res, next) => {
                 formMode: 'edit',
                 btnLabel: 'Edit willingOrganDonor',
                 formAction: '/willingOrganDonors/edit',
-                navLocation: 'WillingOrganDonors'
+                navLocation: 'WillingOrganDonors',
+                validationErrors: []
             });
         });
     // res.render('pages/willingOrganDonor/form-edit', {navLocation: 'WillingOrganDonors'});
@@ -48,7 +51,8 @@ exports.showWillingOrganDonorDetails = (req, res, next) => {
                 formMode: 'showDetails',
                 // btnLabel: 'Edit willingOrganDonor',
                 formAction: '',
-                navLocation: 'WillingOrganDonors'
+                navLocation: 'WillingOrganDonors',
+                validationErrors: []
             });
         });
     // res.render('pages/willingOrganDonor/form-details', {navLocation: 'WillingOrganDonors'});
@@ -59,6 +63,17 @@ exports.addWillingOrganDonor = (req, res, next) => {
     WillingOrganDonorRepository.createWillingOrganDonor(willingOrganDonorData)
         .then( result => {
             res.redirect('/willingOrganDonors');
+        })
+        .catch(err => {
+            res.render('pages/willingOrganDonor/form', {
+                willingOrganDonor: willingOrganDonorData,
+                pageTitle: 'Add willingOrganDonor',
+                formMode: 'createNew',
+                btnLabel: 'Add willingOrganDonor',
+                formAction: '/willingOrganDonors/add',
+                navLocation: 'WillingOrganDonors',
+                validationErrors: err.errors
+            });
         });
 };
 exports.updateWillingOrganDonor = (req, res, next) => {
@@ -67,6 +82,17 @@ exports.updateWillingOrganDonor = (req, res, next) => {
     WillingOrganDonorRepository.updateWillingOrganDonor(idWillingOrganDonor, willingOrganDonorData)
         .then( result => {
             res.redirect('/willingOrganDonors');
+        })
+        .catch(err => {
+            res.render('pages/willingOrganDonor/form', {
+                willingOrganDonor: willingOrganDonorData,
+                pageTitle: 'Edit willingOrganDonor',
+                formMode: 'edit',
+                btnLabel: 'Edit willingOrganDonor',
+                formAction: '/willingOrganDonors/edit',
+                navLocation: 'WillingOrganDonors',
+                validationErrors: err.errors
+            });
         });
 };
 exports.deleteWillingOrganDonor = (req, res, next) => {

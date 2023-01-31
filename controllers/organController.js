@@ -17,7 +17,8 @@ exports.showOrganList = (req, res, next) => {
         .then(organs => {
             res.render('pages/organ/list', {
                 organs: organs,
-                navLocation: 'Organs'
+                navLocation: 'Organs',
+                validationErrors: []
             });
         });
     // res.render('pages/organ/list', {navLocation: 'Organs'});
@@ -29,7 +30,8 @@ exports.showAddOrganForm = (req, res, next) => {
         formMode: 'createNew',
         btnLabel: 'Add organ',
         formAction: '/organs/add',
-        navLocation: 'Organs'
+        navLocation: 'Organs',
+        validationErrors: []
     });
     // res.render('pages/organ/form', {navLocation: 'Organs'});
 }
@@ -44,7 +46,8 @@ exports.showEditOrganForm = (req, res, next) => {
                 formMode: 'edit',
                 btnLabel: 'Edit organ',
                 formAction: '/organs/edit',
-                navLocation: 'Organs'
+                navLocation: 'Organs',
+                validationErrors: []
             });
         });
     // res.render('pages/organ/form-edit', {navLocation: 'Organs'});
@@ -60,7 +63,8 @@ exports.showOrganDetails = (req, res, next) => {
                 formMode: 'showDetails',
                 // btnLabel: 'Edit organ',
                 formAction: '',
-                navLocation: 'Organs'
+                navLocation: 'Organs',
+                validationErrors: []
             });
         });
     // res.render('pages/organ/form-details', {navLocation: 'Organs'});
@@ -71,6 +75,22 @@ exports.addOrgan = (req, res, next) => {
     OrganRepository.createOrgan(organData)
         .then( result => {
             res.redirect('/organs');
+        })
+        .catch(err => {
+            res.render('pages/organ/form', {
+                organ: organData,
+                pageTitle: 'Add organ',
+                formMode: 'createNew',
+                btnLabel: 'Add organ',
+                formAction: '/organs/add',
+                navLocation: 'Organs',
+                validationErrors: err.errors
+            })
+            err.errors.forEach(err => {
+                if (err.path.includes('name') && err.type == 'unique violation'){
+                    err.message = "Name is already in use";
+                }
+            })
         });
 };
 exports.updateOrgan = (req, res, next) => {
@@ -79,6 +99,22 @@ exports.updateOrgan = (req, res, next) => {
     OrganRepository.updateOrgan(idOrgan, organData)
         .then( result => {
             res.redirect('/organs');
+        })
+        .catch(err => {
+            res.render('pages/organ/form', {
+                organ: organData,
+                pageTitle: 'Edit organ',
+                formMode: 'edit',
+                btnLabel: 'Edit organ',
+                formAction: '/organs/edit',
+                navLocation: 'Organs',
+                validationErrors: err.errors
+            })
+            err.errors.forEach(err => {
+                if (err.path.includes('name') && err.type == 'unique violation'){
+                    err.message = "Name is already in use";
+                }
+            })
         });
 };
 exports.deleteOrgan = (req, res, next) => {

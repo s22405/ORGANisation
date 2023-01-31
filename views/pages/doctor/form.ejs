@@ -7,21 +7,43 @@
         <input type="hidden" name="_id" value="<%= doctor._id %>">
 
         <label for="Name">Name: <span class="symbol-required">*</span></label> <!--TODO oh my fucking god I wrote "Name" instead of "name" and I don't know if it'll have consequences-->
-        <input type="text" name="name" id="name" placeholder="1-200 characters" value="<%= doctor.name %>"<%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
-        <span id="errorName" class="errors-text"></span>
+        <input type="text" name="name" id="name" class="<%= validationErrors.find(err => err.path.includes('name')) ? 'error-input' : '' %>" placeholder="1-200 characters" value="<%= doctor.name %>" <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
+
+        <span id="errorName" class="errors-text">
+            <% if (validationErrors.find(err => err.path.includes('name'))) { %>
+                <%= validationErrors.find(err => err.path.includes('name')).message %>
+            <% } %>
+        </span>
+
         <!-- UPDATE: IT DID HAVE CONSEQUENCES! THAT WAS THE FUCKING BUG THAT I'VE BEEN TRYING TO FIND FOR 2 HOURS -->
 
         <label for="DateJoin">DateJoin: <span class="symbol-required">*</span></label>
-        <input type="date" name="dateJoin" id="dateJoin" value=
-        "<%= doctor.dateJoin ? doctor.dateJoin.toISOString().split('T')[0] : '' %>"
-        <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
-        <span id="errorDateJoin" class="errors-text"></span>
+        <%if (formMode == 'createNew'){%>
+            <input type="date" name="dateJoin" id="dateJoin" <%= (formMode == 'showDetails') ? 'disabled' : ''%> class="<%= validationErrors.find(err => err.path.includes('dateJoin')) ? 'error-input' : '' %>"/>
+        <%} else {%>
+            <input type="date" name="dateJoin" id="dateJoin" value="<%= doctor.dateJoin ? doctor.dateJoin.toISOString().split('T')[0] : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : ''%> class="<%= validationErrors.find(err => err.path.includes('dateJoin')) ? 'error-input' : '' %>"/>
+        <%}%>
+
+        <span id="errorDateJoin" class="errors-text">
+            <% if (validationErrors.find(err => err.path.includes('dateJoin'))) { %>
+                <%= validationErrors.find(err => err.path.includes('dateJoin')).message %>
+            <% } %>
+        </span>
 
         <label for="DateLeave">DateLeave: </label>
-        <input type="date" name="dateLeave" id="dateLeave" value=
-        "<%= doctor.dateLeave ? doctor.dateLeave.toISOString().split('T')[0] : '' %>"
-        <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
-        <span id="errorDateLeave" class="errors-text"></span>
+        <%if (formMode == 'createNew') { %>
+        <input type="date" name="dateLeave" id="dateLeave" <%= (formMode == 'showDetails') ? 'disabled' : ''%> class="<%= validationErrors.find(err => err.path.includes('dateLeave')) ? 'error-input' : '' %>"/>
+        <%} else {%>
+        <input type="date" name="dateLeave" id="dateLeave" value="<%= doctor.dateLeave ? doctor.dateLeave.toISOString().split('T')[0] : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : ''%> class="<%= validationErrors.find(err => err.path.includes('dateLeave')) ? 'error-input' : '' %>"/>
+        <%}%>
+
+        <span id="errorDateLeave" class="errors-text">
+            <% if (validationErrors.find(err => err.path.includes('dateLeave'))) { %>
+                <%= validationErrors.find(err => err.path.includes('dateLeave')).message %>
+            <% } %>
+        </span>
+
+
 
         <% if(formMode == 'showDetails') { %>
             <div class="form-buttons"> <!-- labeled as "selection-buttons in the tutorial" -->

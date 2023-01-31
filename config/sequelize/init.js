@@ -56,7 +56,7 @@ module.exports = () => {
         .then(organs => {
             if( !organs || organs.length == 0) {
                 return Organ.bulkCreate([
-                    {name: 'Hearts', price: 99.99} //TODO double check if values are correct
+                    {name: 'Heart', price: 99.99} //TODO double check if values are correct
                 ])
                 .then( () => {
                     return Organ.findAll();

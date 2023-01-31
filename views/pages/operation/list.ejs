@@ -1,25 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <link rel="stylesheet" href="../../../public/css/style.css" />-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width,initial-scale=1"/>-->
-<!--    <title>NotAnOrganHarvestingOperation.INC</title>-->
-<!--</head>-->
-<!--<header>-->
-<!--    <h1>NotAnOrganHarvestingOperation.INC</h1>-->
-<!--    <img src="../../../public/images/rimworld_logo.png" alt="NotAnOrganHarvestingOperation.INC logo">-->
-<!--</header>-->
-<!--<nav>-->
-<!--    <ul>-->
-<!--        <li><a href="../../index.ejs">Home</a></li>-->
-<!--        <li><a href="../doctor/list.ejs">Doctors</a></li>-->
-<!--        <li><a href="list.ejs" class="active">Operations</a></li>-->
-<!--        <li><a href="../willingOrganDonor/list.ejs">WillingOrganDonors</a></li>-->
-<!--        <li><a href="../organ/list.ejs">Organs</a></li>-->
-<!--    </ul>-->
-<!--</nav>-->
-
 <%- include('../../fragment/header.ejs') %>
 
 <main>
@@ -27,7 +5,6 @@
     <table class="table-list">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>WILLING Organ Donor</th>
                 <th>Doctor</th>
                 <th>Organ</th>
@@ -38,36 +15,29 @@
             </tr>
         </thead>
         <tbody>
+            <% for(let operation of operations) { %>
             <tr>
-                <td>1</td>
-                <td>Jonathan Mother</td>
-                <td>Barry The Chopper</td>
-                <td>Heart</td>
-                <td>True</td>
-                <td>1</td>
-                <td>06 April 5500</td>
+                <td><%= operation.willingOrganDonor.name %></td>
+                <td><%= operation.doctor.name %></td>
+                <td><%= operation.organ.name %></td>
+                <td><%= operation.successful %></td>
+                <td><%= operation.bedNumber %></td>
+                <td><%= operation.operationTimestamp.toISOString().split('T')[0] %></td>
                 <td>
                     <ul class="list-actions">
-                        <li>
-                            <a href="/operations/details/1" class="list-actions-button-details">Details</a>
+                        <li><a href="/operations/details/<%=operation._id%>" class="list-actions-button-details">Details</a>
                         </li>
-                        <li>
-                            <a href="/operations/edit/1" class="list-actions-button-edit">Edit</a>
+                        <li><a href="/operations/edit/<%=operation._id%>" class="list-actions-button-edit">Edit</a>
                         </li>
-                        <li>
-                            <a href="https://www.youtube.com/watch?v=DEsqGOHo0nI" class="list-actions-button-delete">Delete</a>
+                        <li><a href="/operations/delete/<%=operation._id%>" class="list-actions-button-delete">Delete</a>
                         </li>
                     </ul>
                 </td>
             </tr>
+            <% } %>
         </tbody>
     </table>
     <p><a href="/operations/add" class="button-add">Add a new Operation</a></p>
 </main>
 
 <%- include('../../fragment/footer.ejs') %>
-
-<!--<footer>-->
-<!--    Maciej Czupyt s22405-->
-<!--</footer>-->
-<!--</html>-->

@@ -10,6 +10,10 @@ router.get('/add', willingOrganDonorController.showAddWillingOrganDonorForm);
 router.get('/details/:idWillingOrganDonor', willingOrganDonorController.showWillingOrganDonorDetails);
 router.get('/edit/:idWillingOrganDonor', willingOrganDonorController.showEditWillingOrganDonorForm);
 
+router.post('/add', willingOrganDonorController.addWillingOrganDonor);
+router.post('/edit', willingOrganDonorController.updateWillingOrganDonor);
+router.get('/delete/:idWillingOrganDonor', willingOrganDonorController.deleteWillingOrganDonor);
+
 module.exports = router;
 
 

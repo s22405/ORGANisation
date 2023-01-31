@@ -1,77 +1,136 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <script type="application/javascript" src="../../../public/js/validationOperationForm.js"></script>-->
-<!--    <script type="application/javascript" src="../../../public/js/validationCommon.js"></script>-->
-<!--    <link rel="stylesheet" href="../../../public/css/style.css" />-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width,initial-scale=1"/>-->
-<!--    <title>NotAnOrganHarvestingOperation.INC</title>-->
-<!--</head>-->
-<!--<header>-->
-<!--    <h1>NotAnOrganHarvestingOperation.INC</h1>-->
-<!--    <img src="../../../public/images/rimworld_logo.png" alt="NotAnOrganHarvestingOperation.INC logo">-->
-<!--</header>-->
-<!--<nav>-->
-<!--    <ul>-->
-<!--        <li><a href="../../index.ejs">Home</a></li>-->
-<!--        <li><a href="../doctor/list.ejs">Doctors</a></li>-->
-<!--        <li><a href="list.ejs" class="active">Operations</a></li>-->
-<!--        <li><a href="../willingOrganDonor/list.ejs">WillingOrganDonors</a></li>-->
-<!--        <li><a href="../organ/list.ejs">Organs</a></li>-->
-<!--    </ul>-->
-<!--</nav>-->
-
 <%- include('../../fragment/header.ejs') %>
 
 <main>
-    <h2>New Operation</h2>
-    <form class="form" novalidate onsubmit="return validateForm()">
-        <label for="WillingOrganDonor">WillingOrganDonor:  <span class="symbol-required">*</span></label>
-        <select name="WillingOrganDonor" id="WillingOrganDonor" required>
-            <option value="0">-- Choose WillingOrganDonor --</option>
-            <option value="1">Jonathan Mother</option>
+    <script type="application/javascript" src="/js/validationOperationForm.js"></script>
+    <h2><%= pageTitle %></h2>
+    <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm();">
+        <input type="hidden" name="_id" value="<%= operation._id %>">
+
+        <label for="willingOrganDonor">WillingOrganDonor: <span class="symbol-required">*</span></label>
+        <select name="willingOrganDonor" id="willingOrganDonor"
+        <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
+            <option value="">-- Choose WillingOrganDonor --</option>
+            <% for(let i=0; i<allWillingOrganDonors.length; i++) { let willingOrganDonor = allWillingOrganDonors[i]; %>
+                <option value="<%= willingOrganDonor._id %>" label="<%= willingOrganDonor.name%>"
+                    <%= (operation._id && willingOrganDonor._id.toString() == operation.idWillingOrganDonor.toString()) ? 'selected' : ''%>
+                ></option>
+            <% } %>
         </select>
         <span id="errorWillingOrganDonor" class="errors-text"></span>
 
-        <label for="Doctor">Doctor:  <span class="symbol-required">*</span></label>
-        <select name="Doctor" id="Doctor" required>
-            <option>-- Choose Doctor --</option>
-            <option value="1">Barry The Chopper</option>
+        <label for="doctor">Doctor: <span class="symbol-required">*</span></label>
+        <select name="doctor" id="doctor"
+        <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
+            <option value="">-- Choose Doctor --</option>
+            <% for(let i=0; i<allDoctors.length; i++) { let doctor = allDoctors[i]; %>
+            <option value="<%= doctor._id %>" label="<%= doctor.name%>"
+                <%= (operation._id && doctor._id.toString() == operation.idDoctor.toString()) ? 'selected' : ''%>
+            ></option>
+            <% } %>
         </select>
         <span id="errorDoctor" class="errors-text"></span>
 
-        <label for="Organ">Organ:  <span class="symbol-required">*</span></label>
-        <select name="Organ" id="Organ" required>
-            <option>-- Choose Organ --</option>
-            <option value="1">Heart</option>
+        <label for="organ">Organ: <span class="symbol-required">*</span></label>
+        <select name="organ" id="organ"
+        <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
+            <option value="">-- Choose Organ --</option>
+            <% for(let i=0; i<allOrgans.length; i++) { let organ = allOrgans[i]; %>
+            <option value="<%= organ._id %>" label="<%= organ.name%>"
+                <%= (operation._id && organ._id.toString() == operation.idOrgan.toString()) ? 'selected' : ''%>
+            ></option>
+            <% } %>
         </select>
         <span id="errorOrgan" class="errors-text"></span>
 
-        <label for="Successful">Successful: </label>
-        <input type="checkbox" name="Successful" id="Successful"/>
+        <label for="successful">Successful: </label>
+        <input type="checkbox" name="successful" id="successful" <%= operation.successful ? 'checked' : '' %>
+        <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
         <span id="errorSuccessful" class="errors-text"></span>
 
-        <label for="BedNumber">BedNumber:  <span class="symbol-required">*</span></label>
-        <input type="number" name="BedNumber" id="BedNumber" min="1" max="99" placeholder="1-99" required/>
+        <label for="bedNumber">BedNumber:  <span class="symbol-required">*</span></label>
+        <input type="number" name="bedNumber" id="bedNumber" min="1" max="99" placeholder="1-99" value="<%= operation.bedNumber %>"
+        <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
         <span id="errorBedNumber" class="errors-text"></span>
 
-        <label for="OperationTimestamp">OperationTimestamp:  <span class="symbol-required">*</span></label>
-        <input type="date" name="OperationTimestamp" id="OperationTimestamp" required/>
+        <label for="operationTimestamp">OperationTimestamp:  <span class="symbol-required">*</span></label>
+        <input type="date" name="operationTimestamp" id="operationTimestamp" value=
+        "<%= operation.operationTimestamp ? operation.operationTimestamp.toISOString().split('T')[0] : '' %>"
+        <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
         <span id="errorOperationTimestamp" class="errors-text"></span>
+
+        <% if(formMode == 'showDetails') { %>
+            <div class="form-buttons"> <!-- labeled as "selection-buttons in the tutorial" -->
+                <a href="/operations/edit/<%= operation._id %>" class="form-button-edit">Edit</a>
+            </div>
+        <% } %>
 
         <div class="form-buttons">
             <p id="errorsSummary" class="errors-text"></p>
-            <input type="submit" value="Submit" class="form-button-submit" />
-            <a href="/operations" class="form-button-cancel">Cancel</a>
+            <% if (formMode != 'showDetails') { %>
+            <input class="form-button-submit" type="submit" value="<%=btnLabel%>"  />
+            <a class="form-button-cancel" href="/operations">Cancel</a>
+            <% } else { %>
+                <a class="form-button-cancel" href="/operations">Return</a>
+            <% } %>
         </div>
 
     </form>
+
+    <% if(formMode == 'showDetails' || formMode == 'edit') { %>
+        <h2>Doctor Details</h2>
+        <table class="table-list">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>DateJoin</th>
+                    <th>DateLeave</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href = "/doctors/details/<%= operation.doctor._id %>"><%= operation.doctor.name %></a></td>
+                    <td><%= operation.doctor.dateJoin.toISOString().split('T')[0] %></td>
+                    <td><%= operation.doctor.dateLeave ? operation.doctor.dateLeave.toISOString().split('T')[0] : '' %></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>WillingOrganDonor Details</h2>
+        <table class="table-list">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>CellNumber</th>
+                    <th>PatientFrom</th>
+                    <th>PatientTill</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href = "/willingOrganDonors/details/<%= operation.willingOrganDonor._id %>"><%= operation.willingOrganDonor.name %></a></td>
+                    <td><%= operation.willingOrganDonor.cellNumber %></td>
+                    <td><%= operation.willingOrganDonor.patientFrom.toISOString().split('T')[0] %></td>
+                    <td><%= operation.willingOrganDonor.patientTill ? operation.willingOrganDonor.patientTill.toISOString().split('T')[0] : '' %></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Organ Details</h2>
+        <table class="table-list">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href = "/organs/details/<%= operation.organ._id %>"><%= operation.organ.name %></a></td>
+                    <td><%= operation.organ.price %></td>
+                </tr>
+            </tbody>
+        </table>
+    <% } %>
 </main>
 
 <%- include('../../fragment/footer.ejs') %>
-
-<!--<footer>-->
-<!--    Maciej Czupyt s22405-->
-<!--</footer>-->
-<!--</html>-->

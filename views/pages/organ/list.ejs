@@ -1,24 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <link rel="stylesheet" href="../../../public/css/style.css" />-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width,initial-scale=1"/>-->
-<!--    <title>NotAnOrganHarvestingOperation.INC</title>-->
-<!--</head>-->
-<!--<header>-->
-<!--    <h1>NotAnOrganHarvestingOperation.INC</h1>-->
-<!--    <img src="../../../public/images/rimworld_logo.png" alt="NotAnOrganHarvestingOperation.INC logo">-->
-<!--</header>-->
-<!--<nav>-->
-<!--    <ul>-->
-<!--        <li><a href="../../index.ejs">Home</a></li>-->
-<!--        <li><a href="../doctor/list.ejs">Doctors</a></li>-->
-<!--        <li><a href="../operation/list.ejs">Operations</a></li>-->
-<!--        <li><a href="../willingOrganDonor/list.ejs">WillingOrganDonors</a></li>-->
-<!--        <li><a href="list.ejs" class="active">Organs</a></li>-->
-<!--    </ul>-->
-<!--</nav>-->
 <%- include('../../fragment/header.ejs') %>
 
 <main>
@@ -26,38 +5,28 @@
     <table class="table-list">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Heart</td>
-                <td>99.99</td>
-                <td>
-                    <ul class="list-actions">
-                        <li>
-                            <a href="/organs/details/1" class="list-actions-button-details">Details</a>
-                        </li>
-                        <li>
-                            <a href="/organs/edit/1" class="list-actions-button-edit">Edit</a>
-                        </li>
-                        <li>
-                            <a href="https://youtu.be/E8gmARGvPlI?t=17" class="list-actions-button-delete">Delete</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+            <% for (let organ of organs) { %>
+                <tr>
+                    <td><%= organ.name %></td>
+                    <td><%= organ.price %></td>
+                    <td>
+                        <ul class="list-actions">
+                            <li><a href="/organs/details/<%=organ._id%>" class="list-actions-button-details">Details</a></li>
+                            <li><a href="/organs/edit/<%=organ._id%>" class="list-actions-button-edit">Edit</a></li>
+                            <li><a href="/organs/delete/<%=organ._id%>" class="list-actions-button-delete">Delete</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            <% } %>
         </tbody>
     </table>
     <p><a href="/organs/add" class="button-add">Add a new Organ</a></p>
 </main>
 
 <%- include('../../fragment/footer.ejs') %>
-<!--<footer>-->
-<!--    Maciej Czupyt s22405-->
-<!--</footer>-->
-<!--</html>-->

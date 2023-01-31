@@ -11,8 +11,8 @@ exports.showDoctorList = (req, res, next) => {
     // res.render('pages/doctor/list', {navLocation: 'Doctors'});
 }
 exports.showAddDoctorForm = (req, res, next) => {
-    res.render('pages/doctor/form', { //TODO was different on tutorial, doctor/form
-        doctor: {}, //TODO double check this later, written "emp" on the tutorial, might be a reference
+    res.render('pages/doctor/form', {
+        doctor: {},
         pageTitle: 'New doctor',
         formMode: 'createNew',
         btnLabel: 'Add doctor',
@@ -55,7 +55,7 @@ exports.showDoctorDetails = (req, res, next) => {
 }
 
 exports.addDoctor = (req, res, next) => {
-    const doctorData = { ...req.body };
+    const doctorData = {...req.body};
     DoctorRepository.createDoctor(doctorData)
         .then( result => {
             res.redirect('/doctors');
@@ -63,14 +63,14 @@ exports.addDoctor = (req, res, next) => {
 };
 exports.updateDoctor = (req, res, next) => {
     const idDoctor = req.body._id;
-    const doctorData = { ...req.body };
+    const doctorData = {...req.body};
     DoctorRepository.updateDoctor(idDoctor, doctorData)
         .then( result => {
             res.redirect('/doctors');
         });
 };
 exports.deleteDoctor = (req, res, next) => {
-    const idDoctor = req.body._id;
+    const idDoctor = req.params.idDoctor;
     DoctorRepository.deleteDoctor(idDoctor)
         .then( () => {
             res.redirect('/doctors');

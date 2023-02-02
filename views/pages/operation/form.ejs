@@ -6,7 +6,7 @@
     <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm();">
         <input type="hidden" name="_id" value="<%= operation._id %>">
 
-        <label for="willingOrganDonor">WillingOrganDonor: <span class="symbol-required">*</span></label>
+        <label for="idWillingOrganDonor">WillingOrganDonor: <span class="symbol-required">*</span></label>
         <select name="idWillingOrganDonor" id="idWillingOrganDonor" class="<%= validationErrors.find(err => err.path.includes('idWillingOrganDonor')) ? 'error-input' : '' %>"
         <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
             <option value="">-- Choose WillingOrganDonor --</option>
@@ -20,7 +20,7 @@
             <% } %>
         </span>
 
-        <label for="doctor">Doctor: <span class="symbol-required">*</span></label>
+        <label for="idDoctor">Doctor: <span class="symbol-required">*</span></label>
         <select name="idDoctor" id="idDoctor" class="<%= validationErrors.find(err => err.path.includes('idDoctor')) ? 'error-input' : '' %>"
         <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
             <option value="">-- Choose Doctor --</option>
@@ -34,7 +34,7 @@
             <% } %>
         </span>
 
-        <label for="organ">Organ: <span class="symbol-required">*</span></label>
+        <label for="idOrgan">Organ: <span class="symbol-required">*</span></label>
         <select name="idOrgan" id="idOrgan" class="<%= validationErrors.find(err => err.path.includes('idOrgan')) ? 'error-input' : '' %>"
         <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
             <option value="">-- Choose Organ --</option>

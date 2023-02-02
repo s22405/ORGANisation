@@ -26,28 +26,30 @@ const Doctor = sequelize.define('Doctor', {
             notEmpty: true,
             isDate: true,
             isAfter: { //TODO double check that this works
-                args: "5500-04-05",
-                msg: "DateJoin cannot happen before landing date (5500-04-05)"
+                args: "5500-03-31",
+                msg: "DateJoin cannot happen before landing date (5500-04-01)"
             }
         }
     },
     dateLeave: {
         type: Sequelize.DATE,
         allowNull: true,
-        validate: {
-            isDate: true,
-            isAfter:  { //DEFINITELY double check that this works
-                args: "5500-04-05",
-                msg: "DateLeave cannot happen before landing date (5500-04-05)"
-                // args: this.dateJoin.toString(),
-                // msg: "DateLeave must be after dateJoin"
-            }
-            // dateLeaveAfterDateJoin() { //yeah no idea if this will work
-            // }
-            //a testament to my attempts at creating a custom function, I've spent ~3 hours trying to create one, I give up
-        }
+        //TODO validation with null didn't fucking work despite the documentation saying that adding "allowNull" will not set them off
+        // guess what? it fucking did
+        // validate: {
+        //     isDate: true,
+        //     isAfter:  { //DEFINITELY double check that this works
+        //         args: "5500-03-31",
+        //         msg: "DateLeave cannot happen before landing date (5500-04-01)"
+        //         // args: this.dateJoin.toString(),
+        //         // msg: "DateLeave must be after dateJoin"
+        //     }
+        //     // dateLeaveAfterDateJoin() { //yeah no idea if this will work
+        //     // }
+        //     //a testament to my attempts at creating a custom function, I've spent ~3 hours trying to create one, I give up
+        // }
     }
-}//,
+});//,
 // {
 //     validate: { //yeah no idea if this will work
 //         patientTillAfterPatientFrom() {
@@ -61,6 +63,6 @@ const Doctor = sequelize.define('Doctor', {
 //custom functions are also cursed
 //or I'm retarded
 //why did you even joke about writing this entire thing in C++? Are you insane?
-);
+
 
 module.exports = Doctor;

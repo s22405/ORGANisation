@@ -53,8 +53,8 @@ const Operation = sequelize.define('Operation', {
             isDate: true,
             notEmpty: true,
             isAfter: { //TODO double check that this works
-                args: "5500-04-05",
-                msg: "DateJoin cannot happen before landing date (5500-04-05)"
+                args: "5500-03-31",
+                msg: "DateJoin cannot happen before landing date (5500-04-01)"
             }
         }
     }

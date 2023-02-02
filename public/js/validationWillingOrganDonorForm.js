@@ -1,11 +1,11 @@
 function validateForm() {
-    let landingDate = "5500-04-05";
+    let landingDate = "5500-04-01";
     let valid = true;
 
     const nameInput = document.getElementById('Name');
-    const cellNumberInput = document.getElementById('CellNumber');
-    const patientFromInput = document.getElementById('PatientFrom');
-    const patientTillInput = document.getElementById('PatientTill');
+    const cellNumberInput = document.getElementById('cellNumber');
+    const patientFromInput = document.getElementById('patientFrom');
+    const patientTillInput = document.getElementById('patientTill');
 
     const errorName = document.getElementById('errorName');
     const errorCellNumber = document.getElementById('errorCellNumber');

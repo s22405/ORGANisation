@@ -36,8 +36,8 @@ const WillingOrganDonor = sequelize.define('WillingOrganDonor', {
             notEmpty: true,
             isDate: true,
             isAfter: {
-                args: "5500-04-05",
-                msg: "PatientFrom cannot happen before landing date (5500-04-05)"
+                args: "5500-03-31",
+                msg: "PatientFrom cannot happen before landing date (5500-04-01)"
             }
         }
     },
@@ -47,8 +47,8 @@ const WillingOrganDonor = sequelize.define('WillingOrganDonor', {
         validate: {
             isDate: true,
             isAfter: {
-                args: "5500-04-05",
-                msg: "PatientTill cannot happen before landing date (5500-04-05)"
+                args: "5500-03-31",
+                msg: "PatientTill cannot happen before landing date (5500-04-01)"
             }
             // isAfter:  { //DEFINITELY double check that this works
             //     args: this.dateJoin.toString(),

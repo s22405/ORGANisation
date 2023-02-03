@@ -10,6 +10,7 @@ const Organ = sequelize.define('Organ', {
     },
     name: {
         type: Sequelize.STRING,
+        // unique: true,
         allowNull: false
     },
     price: {

@@ -27,7 +27,8 @@ exports.getOrganById = (idOrgan) => {
 exports.createOrgan = (newOrganData) => {
     return Organ.create({
         name: newOrganData.name,
-        price: newOrganData.price
+        price: newOrganData.price,
+        // allOrgan: Organ.findAll
     });
 };
 

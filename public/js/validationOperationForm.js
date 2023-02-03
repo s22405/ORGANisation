@@ -1,13 +1,13 @@
 function validateForm() {
-    let landingDate = "5500-04-05";
+    let landingDate = "5500-04-01";
     let valid = true;
 
-    const willingOrganDonorInput = document.getElementById('WillingOrganDonor');
-    const doctorInput = document.getElementById('Doctor');
-    const organInput = document.getElementById('Organ');
-    const successfulInput = document.getElementById('Successful');
-    const bedNumberInput = document.getElementById('BedNumber');
-    const operationTimestampInput = document.getElementById('OperationTimestamp');
+    const willingOrganDonorInput = document.getElementById('idWillingOrganDonor');
+    const doctorInput = document.getElementById('idDoctor');
+    const organInput = document.getElementById('idOrgan');
+    const successfulInput = document.getElementById('successful');
+    const bedNumberInput = document.getElementById('bedNumber');
+    const operationTimestampInput = document.getElementById('operationTimestamp');
 
     const errorWillingOrganDonor = document.getElementById('errorWillingOrganDonor');
     const errorDoctor = document.getElementById('errorDoctor');

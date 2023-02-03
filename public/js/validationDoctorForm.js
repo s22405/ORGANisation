@@ -2,9 +2,9 @@ function validateForm() {
     let landingDate = "5500-04-05";
     let valid = true;
 
-    const nameInput = document.getElementById('Name');
-    const dateJoinInput = document.getElementById('DateJoin');
-    const dateLeaveInput = document.getElementById('DateLeave');
+    const nameInput = document.getElementById('name');
+    const dateJoinInput = document.getElementById('dateJoin');
+    const dateLeaveInput = document.getElementById('dateLeave');
 
     const errorName = document.getElementById('errorName');
     const errorDateJoin = document.getElementById('errorDateJoin');
@@ -36,15 +36,19 @@ function validateForm() {
     }
 
     //dateLeave validation
-    if(!checkDateIfAfter(dateLeaveInput.value, landingDate)) {
-        valid = false;
-        dateLeaveInput.classList.add("error-input");
-        errorDateLeave.innerText = "Date leave cannot be earlier than the landing date (" + landingDate + ")";
-    } else if(!checkDateIfAfter(dateLeaveInput.value, dateJoinInput.value)) {
-        valid = false;
-        dateLeaveInput.classList.add("error-input");
-        errorDateLeave.innerText = "Date leave cannot be earlier than date join.";
+    if(!(dateLeaveInput.value==null || dateLeaveInput.value=='')) {
+        console.log(dateLeaveInput);
+        if(!checkDateIfAfter(dateLeaveInput.value, landingDate)) {
+            valid = false;
+            dateLeaveInput.classList.add("error-input");
+            errorDateLeave.innerText = "Date leave cannot be earlier than the landing date (" + landingDate + ")";
+        } else if(!checkDateIfAfter(dateLeaveInput.value, dateJoinInput.value)) {
+            valid = false;
+            dateLeaveInput.classList.add("error-input");
+            errorDateLeave.innerText = "Date leave cannot be earlier than date join.";
+        }
     }
+
 
     if(!valid) {
         errorsSummary.innerText = "Form contains errors.";

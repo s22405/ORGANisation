@@ -13,6 +13,7 @@ const doctorApiRouter = require('./routes/api/DoctorApiRoute');
 const organApiRouter = require('./routes/api/OrganApiRoute');
 const willingOrganDonorApiRouter = require('./routes/api/WillingOrganDonorApiRoute');
 const operationApiRouter = require('./routes/api/OperationApiRoute');
+const session = require('express-session');
 
 
 var app = express();
@@ -27,6 +28,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+    secret: 'my_secret_password',
+    resave: false
+}))
+
 app.use('/', indexRouter);
 app.use('/doctors', doctorRouter);
 app.use('/operations', operationRouter);
@@ -37,6 +43,8 @@ app.use('/api/doctors', doctorApiRouter); //TODO /api/doctors ?
 app.use('/api/organs', organApiRouter); //TODO /api/doctors ?
 app.use('/api/willingOrganDonors', willingOrganDonorApiRouter); //TODO /api/doctors ?
 app.use('/api/operations', operationApiRouter); //TODO /api/doctors ?
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -40,7 +40,7 @@ module.exports = () => {
         .then(willingOrganDonors => {
             if( !willingOrganDonors || willingOrganDonors.length == 0) {
                 return WillingOrganDonor.bulkCreate([
-                    {name: 'Jonathan Mother', cellNumber: 1, patientFrom: '5500-04-05', patientTill: '5500-04-06'} //TODO double check if values are correct
+                    {name: 'Jonathan Mother', cellNumber: 1, patientFrom: '5500-04-05', patientTill: '5500-04-06', password: 12345} //TODO double check if values are correct
                 ])
                 .then( () => {
                     return WillingOrganDonor.findAll();

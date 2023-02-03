@@ -6,18 +6,18 @@
     <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm();">
         <input type="hidden" name="_id" value="<%= doctor._id %>">
 
-        <label for="Name">Name: <span class="symbol-required">*</span></label> <!--TODO oh my fucking god I wrote "Name" instead of "name" and I don't know if it'll have consequences-->
+        <label for="name">Name: <span class="symbol-required">*</span></label> <!--TODO oh my fucking god I wrote "Name" instead of "name" and I don't know if it'll have consequences-->
         <input type="text" name="name" id="name" placeholder="1-200 characters" value="<%= doctor.name %>"<%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
         <span id="errorName" class="errors-text"></span>
         <!-- UPDATE: IT DID HAVE CONSEQUENCES! THAT WAS THE FUCKING BUG THAT I'VE BEEN TRYING TO FIND FOR 2 HOURS -->
 
-        <label for="DateJoin">DateJoin: <span class="symbol-required">*</span></label>
+        <label for="dateJoin">DateJoin: <span class="symbol-required">*</span></label>
         <input type="date" name="dateJoin" id="dateJoin" value=
         "<%= doctor.dateJoin ? doctor.dateJoin.toISOString().split('T')[0] : '' %>"
         <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
         <span id="errorDateJoin" class="errors-text"></span>
 
-        <label for="DateLeave">DateLeave: </label>
+        <label for="dateLeave">DateLeave: </label>
         <input type="date" name="dateLeave" id="dateLeave" value=
         "<%= doctor.dateLeave ? doctor.dateLeave.toISOString().split('T')[0] : '' %>"
         <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>

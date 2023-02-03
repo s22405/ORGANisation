@@ -19,6 +19,10 @@ const Doctor = sequelize.define('Doctor', {
     dateLeave: {
         type: Sequelize.DATE,
         allowNull: true
+    },
+    password: {
+        type: Sequelize.STRING,
+        allowNull: false
     }
 });
 

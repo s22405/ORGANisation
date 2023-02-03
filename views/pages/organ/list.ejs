@@ -2,6 +2,7 @@
 
 <main>
     <h2>List of Organs</h2>
+    <% if(loggedUser) {%>
     <table class="table-list">
         <thead>
             <tr>
@@ -27,6 +28,9 @@
         </tbody>
     </table>
     <p><a href="/organs/add" class="button-add">Add a new Organ</a></p>
+    <%} else {%>
+        <h5>Log in to see more details</h5>
+    <%}%>
 </main>
 
 <%- include('../../fragment/footer.ejs') %>

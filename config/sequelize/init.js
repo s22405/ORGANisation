@@ -5,6 +5,9 @@ const WillingOrganDonor = require('../../model/sequelize/WillingOrganDonor');
 const Organ = require('../../model/sequelize/Organ');
 const Operation = require('../../model/sequelize/Operation');
 
+const authUtil = require('../../util/authUtils');
+const passHash = authUtil.hashPassword('12345');
+
 module.exports = () => {
     Doctor.hasMany(Operation, {as: 'operations', foreignKey:{name: 'idDoctor', allowNull: false}, constraints: true, onDelete: 'CASCADE'});
     Operation.belongsTo(Doctor, {as: 'doctor', foreignKey: {name: 'idDoctor', allowNull: false}});
@@ -24,7 +27,7 @@ module.exports = () => {
         .then(doctors => {
             if( !doctors || doctors.length == 0) {
                 return Doctor.bulkCreate([
-                    {name: 'BarryTheChopper', dateJoin: '5500-04-01', dateLeave: null}
+                    {name: 'BarryTheChopper', dateJoin: '5500-04-01', dateLeave: null, password: passHash}
                 ])
                 .then( () => {
                     return Doctor.findAll();
@@ -40,7 +43,7 @@ module.exports = () => {
         .then(willingOrganDonors => {
             if( !willingOrganDonors || willingOrganDonors.length == 0) {
                 return WillingOrganDonor.bulkCreate([
-                    {name: 'Jonathan Mother', cellNumber: 1, patientFrom: '5500-04-05', patientTill: '5500-04-06', password: 12345} //TODO double check if values are correct
+                    {name: 'Jonathan Mother', cellNumber: 1, patientFrom: '5500-04-05', patientTill: '5500-04-06'} //TODO double check if values are correct
                 ])
                 .then( () => {
                     return WillingOrganDonor.findAll();

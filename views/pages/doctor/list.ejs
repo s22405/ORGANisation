@@ -2,6 +2,7 @@
 
 <main>
     <h2>List of Doctors</h2>
+    <% if(loggedUser) {%>
     <table class="table-list">
         <thead>
             <tr>
@@ -29,6 +30,9 @@
         </tbody>
     </table>
     <p><a href="/doctors/add" class="button-add">Add a new psychopath</a></p>
+    <%} else {%>
+        <h5>Log in to see more details</h5>
+    <%}%>
 </main>
 
 <%- include('../../fragment/footer.ejs') %>

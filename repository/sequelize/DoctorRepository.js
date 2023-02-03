@@ -44,3 +44,9 @@ exports.deleteDoctor = (idDoctor) => {
         where: { _id: idDoctor }
     });
 };
+
+exports.findByName = (name) => {
+    return Doctor.findOne({
+        where: {name: name}
+    });
+}

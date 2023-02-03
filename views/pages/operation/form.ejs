@@ -1,6 +1,7 @@
 <%- include('../../fragment/header.ejs') %>
 
 <main>
+    <% if(loggedUser) {%>
     <script type="application/javascript" src="/js/validationOperationForm.js"></script>
     <h2><%= pageTitle %></h2>
     <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm();">
@@ -135,6 +136,9 @@
             </tbody>
         </table>
     <% } %>
+    <%} else {%>
+        <h5>Log in to see more details</h5>
+    <%}%>
 </main>
 
 <%- include('../../fragment/footer.ejs') %>

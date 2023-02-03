@@ -2,6 +2,7 @@
 
 <main>
     <h2>List of Operations</h2>
+    <% if(loggedUser) {%>
     <table class="table-list">
         <thead>
             <tr>
@@ -38,6 +39,9 @@
         </tbody>
     </table>
     <p><a href="/operations/add" class="button-add">Add a new Operation</a></p>
+    <%} else {%>
+        <h5>Log in to see more details</h5>
+    <%}%>
 </main>
 
 <%- include('../../fragment/footer.ejs') %>

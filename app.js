@@ -15,6 +15,8 @@ const willingOrganDonorApiRouter = require('./routes/api/WillingOrganDonorApiRou
 const operationApiRouter = require('./routes/api/OperationApiRoute');
 const session = require('express-session');
 
+const authUtils = require('./util/authUtils')
+
 
 var app = express();
 
@@ -31,7 +33,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: 'my_secret_password',
     resave: false
-}))
+}));
+
+app.use((req, res, next) => {
+    const loggedUser = req.session.loggedUser;
+    res.locals.loggedUser = loggedUser;
+    if(!res.locals.loginError) {
+        res.locals.loginError = undefined;
+    }
+    next();
+});
+
+app.use('/doctors', authUtils.permitAuthenticatedUser, doctorRouter);
+app.use('/organs', authUtils.permitAuthenticatedUser, organRouter);
+app.use('/willingOrganDonors', authUtils.permitAuthenticatedUser, willingOrganDonorRouter);
+app.use('/operations', authUtils.permitAuthenticatedUser, operationRouter);
+
 
 app.use('/', indexRouter);
 app.use('/doctors', doctorRouter);

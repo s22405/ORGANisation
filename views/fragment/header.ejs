@@ -10,6 +10,24 @@
 <header>
     <h1>NotAnOrganHarvestingOperation.INC</h1>
     <img src="/images/rimworld_logo.png" alt="NotAnOrganHarvestingOperation.INC logo">
+    <% if(!loggedUser) { %>
+        <div id="login">
+            <h5>Login</h5>
+            <form method="post" action="/login" novalidate>
+                <label for="loginName">Name:</label>
+                <input type="text" id="loginName" name="name">
+
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" name="password">
+
+                <input type="submit" value="Sign in">
+                <span id="loginErrors"><%= loginError ? loginError : ''%></span>
+            </form>
+        </div>
+    <% } else { %>
+        <span>You are logged in as: <%=loggedUser.name%></span>
+        <a href="/logout">Sign out</a>
+    <% } %>
 </header>
 <nav>
     <ul>

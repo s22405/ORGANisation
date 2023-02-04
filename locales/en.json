@@ -7,8 +7,7 @@
 		"logOut": "Sign out"
 	},
 	"home": {
-		"content": "Home",
-		"contnet": "home.contnet"
+		"content": "Home"
 	},
 	"nav": {
 		"home": "Home",

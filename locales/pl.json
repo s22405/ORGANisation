@@ -7,8 +7,7 @@
 		"logOut": "Wyloguj się"
 	},
 	"home": {
-		"content": "Strona główna",
-		"contnet": "home.contnet"
+		"content": "Strona główna"
 	},
 	"nav": {
 		"home": "Strona główna",

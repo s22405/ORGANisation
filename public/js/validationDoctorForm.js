@@ -5,13 +5,15 @@ function validateForm() {
     const nameInput = document.getElementById('name');
     const dateJoinInput = document.getElementById('dateJoin');
     const dateLeaveInput = document.getElementById('dateLeave');
+    const passwordInput = document.getElementById('password');
 
     const errorName = document.getElementById('errorName');
     const errorDateJoin = document.getElementById('errorDateJoin');
     const errorDateLeave = document.getElementById('errorDateLeave');
+    const errorPassword = document.getElementById('errorPassword');
     const errorsSummary = document.getElementById('errorsSummary');
 
-    resetErrors([nameInput, dateJoinInput, dateLeaveInput], [errorName, errorDateJoin, errorDateLeave], errorsSummary);
+    resetErrors([nameInput, dateJoinInput, dateLeaveInput, passwordInput], [errorName, errorDateJoin, errorDateLeave,errorPassword], errorsSummary);
 
     //name validation
     if(!checkRequired(nameInput.value)) {
@@ -36,7 +38,7 @@ function validateForm() {
     }
 
     //dateLeave validation
-    if(!(dateLeaveInput.value==null || dateLeaveInput.value=='')) {
+    if(!(dateLeaveInput.value==null || dateLeaveInput.value=='')) { //issues with dateLeave being null
         console.log(dateLeaveInput);
         if(!checkDateIfAfter(dateLeaveInput.value, landingDate)) {
             valid = false;
@@ -47,6 +49,17 @@ function validateForm() {
             dateLeaveInput.classList.add("error-input");
             errorDateLeave.innerText = "Date leave cannot be earlier than date join.";
         }
+    }
+
+    //password validation
+    if(!checkRequired(passwordInput.value)) {
+        valid = false;
+        passwordInput.classList.add("error-input");
+        errorPassword.innerText = "The field is required.";
+    } else if(!checkTextLengthRange(passwordInput.value,1,200)) {
+        valid = false;
+        passwordInput.classList.add("error-input");
+        errorPassword.innerText = "This field should contain 1 to 200 characters.";
     }
 
 

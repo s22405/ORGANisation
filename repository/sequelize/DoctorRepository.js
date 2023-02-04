@@ -2,6 +2,7 @@ const Doctor = require('../../model/sequelize/Doctor');
 const Operation = require('../../model/sequelize/Operation');
 const Organ = require('../../model/sequelize/Organ');
 const WillingOrganDonor = require('../../model/sequelize/WillingOrganDonor');
+const authUtil = require("../../util/authUtils");
 
 exports.getDoctors = () => {
     return Doctor.findAll();
@@ -28,7 +29,8 @@ exports.createDoctor = (newDoctorData) => {
     return Doctor.create({
         name: newDoctorData.name,
         dateJoin: newDoctorData.dateJoin,
-        dateLeave: newDoctorData.dateLeave
+        dateLeave: newDoctorData.dateLeave,
+        password: authUtil.hashPassword(newDoctorData.password)
     });
 };
 
@@ -36,7 +38,13 @@ exports.updateDoctor = (idDoctor, doctorData) => {
     const name = doctorData.name;
     const dateJoin = doctorData.dateJoin;
     const dateLeave = doctorData.dateLeave;
-    return Doctor.update(doctorData, {where: {_id: idDoctor} });
+    const password = doctorData.password;
+    return Doctor.update({
+        name: name,
+        dateJoin: dateJoin,
+        dateLeave: dateLeave,
+        password: authUtil.hashPassword(password)
+    }, {where: {_id: idDoctor} });
 };
 
 exports.deleteDoctor = (idDoctor) => {

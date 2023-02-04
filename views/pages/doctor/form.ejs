@@ -24,6 +24,12 @@
         <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
         <span id="errorDateLeave" class="errors-text"></span>
 
+        <% if (formMode != 'showDetails') {%>
+            <label for="password">Password: <span class="symbol-required">*</span></label>
+            <input type="password" name="password" id="password" placeholder="1-200 characters" />
+            <span id="errorPassword" class="errors-text"></span>
+        <% } %>
+
         <% if(formMode == 'showDetails') { %>
             <div class="form-buttons"> <!-- labeled as "selection-buttons in the tutorial" -->
                 <a href="/doctors/edit/<%= doctor._id %>" class="form-button-edit">Edit</a>

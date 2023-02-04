@@ -13,7 +13,7 @@ function checkRequired(value) {
         return false;
     }
     value = value.toString().trim();
-    if(value==="") {
+    if(value=="") {
         return false;
     }
     return true;

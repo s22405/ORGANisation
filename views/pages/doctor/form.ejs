@@ -8,8 +8,12 @@
         <input type="hidden" name="_id" value="<%= doctor._id %>">
 
         <label for="name"><%= __('doctor.fields.name') %><span class="symbol-required">*</span></label> <!-- oh my fucking god I wrote "Name" instead of "name" and I don't know if it'll have consequences-->
-        <input type="text" name="name" id="name" placeholder="1-200 characters" value="<%= doctor.name %>"<%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
+        <input type="text" name="name" id="name" placeholder="1-200 characters" value="<%= doctor.name %>" <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
         <span id="errorName" class="errors-text"></span>
+        <div style="display: none">
+            <span id="errorMessage-fieldRequired"><%= __('validationMessage.fieldRequired') %></span>
+            <span id="errorMessage-characterLimit"><%= __('validationMessage.characterLimit') %></span>
+        </div>
         <!-- UPDATE: IT DID HAVE CONSEQUENCES! THAT WAS THE FUCKING BUG THAT I'VE BEEN TRYING TO FIND FOR 2 HOURS -->
 
         <label for="dateJoin"><%= __('doctor.fields.dateJoin') %><span class="symbol-required">*</span></label>
@@ -37,7 +41,7 @@
         <% } %>
 
         <div class="form-buttons">
-            <span id="errorsSummary" class="errors-text"><%=__('validationMessage.invalidForm')%></span>
+            <span id="errorsSummary" class="errors-text"></span>
             <% if (formMode != 'showDetails') { %>
                 <input class="form-button-submit" type="submit" value="<%=btnLabel%>"  />
                 <a class="form-button-cancel" href="/doctors"><%= __('form.actions.cancel') %></a>

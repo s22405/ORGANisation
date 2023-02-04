@@ -7,7 +7,7 @@
     <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm();">
         <input type="hidden" name="_id" value="<%= operation._id %>">
 
-        <label for="willingOrganDonor">WillingOrganDonor: <span class="symbol-required">*</span></label>
+        <label for="idWillingOrganDonor">WillingOrganDonor: <span class="symbol-required">*</span></label>
         <select name="idWillingOrganDonor" id="idWillingOrganDonor"
         <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
             <option value="">-- Choose WillingOrganDonor --</option>
@@ -17,7 +17,7 @@
         </select>
         <span id="errorWillingOrganDonor" class="errors-text"></span>
 
-        <label for="doctor">Doctor: <span class="symbol-required">*</span></label>
+        <label for="idDoctor">Doctor: <span class="symbol-required">*</span></label>
         <select name="idDoctor" id="idDoctor"
         <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
             <option value="">-- Choose Doctor --</option>
@@ -27,7 +27,7 @@
         </select>
         <span id="errorDoctor" class="errors-text"></span>
 
-        <label for="organ">Organ: <span class="symbol-required">*</span></label>
+        <label for="idOrgan">Organ: <span class="symbol-required">*</span></label>
         <select name="idOrgan" id="idOrgan"
         <%= (formMode == 'showDetails') ? 'disabled' : '' %>>
             <option value="">-- Choose Organ --</option>

@@ -13,34 +13,40 @@ function validateForm() {
     const errorPassword = document.getElementById('errorPassword');
     const errorsSummary = document.getElementById('errorsSummary');
 
-    const reqMessageName = document.getElementById('errorName').innerText;
-    const reqMessageDateJoin = document.getElementById('errorDateJoin').innerText;
-    const reqMessageDateLeave = document.getElementById('errorDateLeave').innerText;
-    const reqMessagePassword = document.getElementById('errorPassword').innerText;
-    const reqMessageSummary = document.getElementById('errorsSummary').innerText
+    //TODO internationalization of error messages was causing validation to not work, it's poorly explained in the tutorial too.
 
-    resetErrors([nameInput, dateJoinInput, dateLeaveInput, passwordInput], [errorName, errorDateJoin, errorDateLeave,errorPassword], errorsSummary);
+    // const invalidFormMessage = document.getElementById('errorMessage-invalidForm').innerText;
+    // const fieldRequiredMessage = document.getElementById('errorMessage-fieldRequired').innerText;
+    // const characterLimitMessage = document.getElementById('errorMessage-characterLimit').innerText;
+    // const dateBeforeLandingMessage = document.getElementById('errorMessage-dateBeforeLanding').innerText;
+    // const dateLeaveBeforeJoinMessage = document.getElementById('errorMessage-dateLeaveBeforeJoin').innerText;
+
+    resetErrors([nameInput, dateJoinInput, dateLeaveInput, passwordInput], [errorName, errorDateJoin, errorDateLeave, errorPassword], errorsSummary);
 
     //name validation
     if(!checkRequired(nameInput.value)) {
         valid = false;
         nameInput.classList.add("error-input");
-        errorName.innerText = reqMessageName;
+        errorName.innerText = "This field is required";
+        //errorName.innerText = __('validationMessage.fieldRequired');//fieldRequiredMessage;
     } else if(!checkTextLengthRange(nameInput.value,1,200)) {
         valid = false;
         nameInput.classList.add("error-input");
-        errorName.innerText = reqMessageName;
+        errorName.innerText = "This field has a character limit.";
+        // errorName.innerText = characterLimitMessage;
     }
 
     //dateJoin validation
     if(!checkRequired(dateJoinInput.value)) {
         valid = false;
         dateJoinInput.classList.add("error-input");
-        errorDateJoin.innerText = reqMessageDateJoin;
+        errorDateJoin.innerText = "This field is required";
+        // errorDateJoin.innerText = fieldRequiredMessage;
     } else if(!checkDateIfAfter(dateJoinInput.value, landingDate)) {
         valid = false;
         dateJoinInput.classList.add("error-input");
-        errorDateJoin.innerText = reqMessageDateJoin;
+        errorDateJoin.innerText = "Date cannot occur before landing date.";
+        // errorDateJoin.innerText = dateBeforeLandingMessage;
     }
 
     //dateLeave validation
@@ -49,11 +55,13 @@ function validateForm() {
         if(!checkDateIfAfter(dateLeaveInput.value, landingDate)) {
             valid = false;
             dateLeaveInput.classList.add("error-input");
-            errorDateLeave.innerText = reqMessageDateLeave;
+            errorDateLeave.innerText = "Date cannot occur before landing date.";
+            // errorDateLeave.innerText = dateBeforeLandingMessage;
         } else if(!checkDateIfAfter(dateLeaveInput.value, dateJoinInput.value)) {
             valid = false;
             dateLeaveInput.classList.add("error-input");
-            errorDateLeave.innerText = reqMessageDateLeave;
+            errorDateLeave.innerText = "Date leave cannot happen earlier than Date join";
+            // errorDateLeave.innerText = dateLeaveBeforeJoinMessage;
         }
     }
 
@@ -61,16 +69,17 @@ function validateForm() {
     if(!checkRequired(passwordInput.value)) {
         valid = false;
         passwordInput.classList.add("error-input");
-        errorPassword.innerText = reqMessagePassword;
+        errorPassword.innerText = "This field is required";
+        // errorPassword.innerText = fieldRequiredMessage;
     } else if(!checkTextLengthRange(passwordInput.value,1,200)) {
         valid = false;
         passwordInput.classList.add("error-input");
-        errorPassword.innerText = reqMessagePassword;
+        errorPassword.innerText = "This field has a character limit.";
+        // errorPassword.innerText = characterLimitMessage;
     }
 
-
     if(!valid) {
-        errorsSummary.innerText = reqMessageSummary;
+        errorsSummary.innerText = "Form contains errors.";
     }
 
     return valid;

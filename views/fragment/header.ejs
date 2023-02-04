@@ -12,12 +12,12 @@
     <img src="/images/rimworld_logo.png" alt="NotAnOrganHarvestingOperation.INC logo">
     <% if(!loggedUser) { %>
         <div id="login">
-            <h5>Login</h5>
+            <h5><%= __('login.login')%></h5>
             <form method="post" action="/login" novalidate>
-                <label for="loginName">Name:</label>
+                <label for="loginName"><%= __('login.name')%></label>
                 <input type="text" id="loginName" name="name">
 
-                <label for="loginPassword">Password:</label>
+                <label for="loginPassword"><%= __('login.password')%></label>
                 <input type="password" id="loginPassword" name="password">
 
                 <input type="submit" value="Sign in">
@@ -25,16 +25,19 @@
             </form>
         </div>
     <% } else { %>
-        <span>You are logged in as: <%=loggedUser.name%></span>
-        <a href="/logout">Sign out</a>
+        <span><%= __('login.loggedMessage')%>: <%=loggedUser.name%></span>
+        <a href="/logout"><%= __('login.logOut')%></a>
     <% } %>
 </header>
 <nav>
     <ul>
-        <li><a href="/" class="<%= navLocation == 'Home' ? 'active' : ''%>">Home</a></li>
-        <li><a href="/doctors" class="<%= navLocation == 'Doctors' ? 'active' : ''%>">Doctors</a></li>
-        <li><a href="/operations" class="<%= navLocation == 'Operations' ? 'active' : ''%>">Operations</a></li>
-        <li><a href="/willingOrganDonors" class="<%= navLocation == 'WillingOrganDonors' ? 'active' : ''%>">WillingOrganDonors</a></li>
-        <li><a href="/organs" class="<%= navLocation == 'Organs' ? 'active' : ''%>">Organs</a></li>
+        <li><a href="/" class="<%= navLocation == 'Home' ? 'active' : ''%>"><%= __('nav.home')%></a></li>
+        <li><a href="/doctors" class="<%= navLocation == 'Doctors' ? 'active' : ''%>"><%= __('nav.doctors')%></a></li>
+        <li><a href="/operations" class="<%= navLocation == 'Operations' ? 'active' : ''%>"><%= __('nav.operations')%></a></li>
+        <li><a href="/willingOrganDonors" class="<%= navLocation == 'WillingOrganDonors' ? 'active' : ''%>"><%= __('nav.willingOrganDonors')%></a></li>
+        <li><a href="/organs" class="<%= navLocation == 'Organs' ? 'active' : ''%>"><%= __('nav.organs')%></a></li>
+        <li><a href="/changeLang/pl" class="<%= lang == 'pl' ? 'active' : ''%>">PL</a></li>
+        <li><a href="/changeLang/en" class="<%= lang == 'en' ? 'active' : ''%>">EN</a></li>
+
     </ul>
 </nav>

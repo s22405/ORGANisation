@@ -13,9 +13,9 @@ exports.showDoctorList = (req, res, next) => {
 exports.showAddDoctorForm = (req, res, next) => {
     res.render('pages/doctor/form', {
         doctor: {},
-        pageTitle: 'New doctor',
+        pageTitle: req.__('doctor.form.add.pageTitle'),
         formMode: 'createNew',
-        btnLabel: 'Add doctor',
+        btnLabel: req.__('doctor.form.add.btnLabel'),
         formAction: '/doctors/add',
         navLocation: 'Doctors'
     });
@@ -28,9 +28,9 @@ exports.showEditDoctorForm = (req, res, next) => {
         .then(doctor => {
             res.render('pages/doctor/form', {
                 doctor: doctor,
-                pageTitle: 'Edit doctor',
+                pageTitle: req.__('doctor.form.edit.pageTitle'),
                 formMode: 'edit',
-                btnLabel: 'Edit doctor',
+                btnLabel: req.__('doctor.form.edit.btnLabel'),
                 formAction: '/doctors/edit',
                 navLocation: 'Doctors'
             });
@@ -44,7 +44,7 @@ exports.showDoctorDetails = (req, res, next) => {
         .then(doctor => {
             res.render('pages/doctor/form', {
                 doctor: doctor,
-                pageTitle: 'Doctor details',
+                pageTitle: req.__('doctor.form.details.pageTitle'),
                 formMode: 'showDetails',
                 // btnLabel: 'Edit doctor',
                 formAction: '',

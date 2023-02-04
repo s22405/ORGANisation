@@ -43,7 +43,7 @@ module.exports = () => {
         .then(willingOrganDonors => {
             if( !willingOrganDonors || willingOrganDonors.length == 0) {
                 return WillingOrganDonor.bulkCreate([
-                    {name: 'Jonathan Mother', cellNumber: 1, patientFrom: '5500-04-05', patientTill: '5500-04-06'} //TODO double check if values are correct
+                    {name: 'Jonathan Mother', cellNumber: 1, patientFrom: '5500-04-05', patientTill: '5500-04-06'}
                 ])
                 .then( () => {
                     return WillingOrganDonor.findAll();
@@ -59,7 +59,7 @@ module.exports = () => {
         .then(organs => {
             if( !organs || organs.length == 0) {
                 return Organ.bulkCreate([
-                    {name: 'Heart', price: 99.99} //TODO double check if values are correct
+                    {name: 'Heart', price: 99.99}
                 ])
                 .then( () => {
                     return Organ.findAll();

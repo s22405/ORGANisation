@@ -1,15 +1,15 @@
 <%- include('../../fragment/header.ejs') %>
 
 <main>
-    <h2>List of Doctors</h2>
+    <h2><%= __('doctor.list.pageTitle') %></h2>
     <% if(loggedUser) {%>
     <table class="table-list">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>DateJoin</th>
-                <th>DateLeave</th>
-                <th>Actions</th>
+                <th><%= __('doctor.fields.name') %></th>
+                <th><%= __('doctor.fields.dateJoin') %></th>
+                <th><%= __('doctor.fields.dateLeave') %></th>
+                <th><%= __('list.actions.title') %></th>
             </tr>
         </thead>
         <tbody>
@@ -20,16 +20,16 @@
                     <td><%= doctor.dateLeave ? doctor.dateLeave.toISOString().split('T')[0] : '' %></td>
                     <td>
                         <ul class="list-actions">
-                            <li><a href="/doctors/details/<%=doctor._id%>" class="list-actions-button-details">Details</a></li>
-                            <li><a href="/doctors/edit/<%=doctor._id %>" class="list-actions-button-edit">Edit</a></li>
-                            <li><a href="/doctors/delete/<%=doctor._id %>" class="list-actions-button-delete">Delete</a></li>
+                            <li><a href="/doctors/details/<%=doctor._id%>" class="list-actions-button-details"><%= __('list.actions.details') %></a></li>
+                            <li><a href="/doctors/edit/<%=doctor._id %>" class="list-actions-button-edit"><%= __('list.actions.edit') %></a></li>
+                            <li><a href="/doctors/delete/<%=doctor._id %>" class="list-actions-button-delete"><%= __('list.actions.delete') %></a></li>
                         </ul>
                     </td>
                 </tr>
             <% } %>
         </tbody>
     </table>
-    <p><a href="/doctors/add" class="button-add">Add a new psychopath</a></p>
+    <p><a href="/doctors/add" class="button-add"><%= __('doctor.list.addNew') %></a></p>
     <%} else {%>
         <h5>Log in to see more details</h5>
     <%}%>

@@ -1,0 +1,79 @@
+{
+	"login": {
+		"login": "Logowanie",
+		"name": "Nazwa",
+		"password": "Hasło",
+		"loggedMessage": "Jesteś zalogowany jako",
+		"logOut": "Wyloguj się"
+	},
+	"home": {
+		"content": "Strona główna",
+		"contnet": "home.contnet"
+	},
+	"nav": {
+		"home": "Strona główna",
+		"doctors": "Lekarze",
+		"operations": "Operacje",
+		"willingOrganDonors": "Dobrowolni Dawcy Organów",
+		"organs": "Organy"
+	},
+	"list": {
+		"actions": {
+			"title": "Akcje",
+			"details": "Szczegóły",
+			"edit": "Edytuj",
+			"delete": "Usuń"
+		}
+	},
+	"form": {
+		"actions": {
+			"return": "Powrót",
+			"edit": "Edytuj",
+			"cancel": "Anuluj"
+		}
+	},
+	"doctor": {
+		"fields": {
+			"name": "Imię",
+			"dateJoin": "Data dołączenia",
+			"dateLeave": "Data odejścia"
+		},
+		"list": {
+			"title": "Lekarze",
+			"addNew": "Dodaj nowego psychopatę",
+			"noData": "Brak lekarzy w bazie",
+			"pageTitle": "Lista lekarzy"
+		},
+		"form": {
+			"operations": "Historia operacji",
+			"add": {
+				"pageTitle": "Dodawanie lekarza",
+				"btnLabel": "Dodaj lekarza",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie dodano lekarza"
+				}
+			},
+			"edit": {
+				"pageTitle": "Edycja lekarza",
+				"btnLabel": "Zapisz zmiany",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie zaktualizowano lekarza"
+				}
+			},
+			"details": {
+				"pageTitle": "Dane lekarza"
+			}
+		}
+	},
+	"validationMessage": {
+		"invalidForm": "Formularz zawiera błędy.",
+		"fieldRequired": "To pole jest wymagane.",
+		"characterLimit": "To pole ma limit znaków.",
+		"dateBeforeLanding": "Data nie może być przed datą wylądowania.",
+		"doctor": {
+			"dateLeaveBeforeJoin": "Data odejścia nie może byc przed datą dołącznia"
+		}
+	}
+}

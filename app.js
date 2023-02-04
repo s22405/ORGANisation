@@ -17,6 +17,8 @@ const session = require('express-session');
 
 const authUtils = require('./util/authUtils')
 
+const i18n = require('i18n');
+
 
 var app = express();
 
@@ -44,6 +46,23 @@ app.use((req, res, next) => {
     next();
 });
 
+i18n.configure({
+    locales: ['pl', 'en'], // languages available in the application. Create a separate dictionary for each of them
+    directory: path.join(__dirname, 'locales'), // TODO path to the directory where the dictionaries are located
+    objectNotation: true, // enables the use of nested keys in object notation
+    cookie: 'acme-hr-lang', //the name of the cookie that our application will use to store information about the language currently selected by the user
+});
+app.use(i18n.init); //initialization and connection to the application context
+app.use(cookieParser('secret'));
+app.use((req, res, next) => {
+    if(!res.locals.lang) {
+        const currentLang = req.cookies['acme-hr-lang'];
+        res.locals.lang = currentLang;
+    }
+    next();
+}); //TODO not sure if I added all the things needed to make languages work, check later
+
+//business routes (I think)
 app.use('/doctors', authUtils.permitAuthenticatedUser, doctorRouter);
 app.use('/organs', authUtils.permitAuthenticatedUser, organRouter);
 app.use('/willingOrganDonors', authUtils.permitAuthenticatedUser, willingOrganDonorRouter);
@@ -56,10 +75,10 @@ app.use('/operations', operationRouter);
 app.use('/willingOrganDonors', willingOrganDonorRouter);
 app.use('/organs', organRouter);
 
-app.use('/api/doctors', doctorApiRouter); //TODO /api/doctors ?
-app.use('/api/organs', organApiRouter); //TODO /api/doctors ?
-app.use('/api/willingOrganDonors', willingOrganDonorApiRouter); //TODO /api/doctors ?
-app.use('/api/operations', operationApiRouter); //TODO /api/doctors ?
+app.use('/api/doctors', doctorApiRouter);
+app.use('/api/organs', organApiRouter);
+app.use('/api/willingOrganDonors', willingOrganDonorApiRouter);
+app.use('/api/operations', operationApiRouter);
 
 
 

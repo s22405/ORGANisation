@@ -1,0 +1,79 @@
+{
+	"login": {
+		"login": "Login",
+		"name": "Name",
+		"password": "Password",
+		"loggedMessage": "You are logged in as",
+		"logOut": "Sign out"
+	},
+	"home": {
+		"content": "Home",
+		"contnet": "home.contnet"
+	},
+	"nav": {
+		"home": "Home",
+		"doctors": "Doctors",
+		"operations": "Operations",
+		"willingOrganDonors": "WillingOrganDonors",
+		"organs": "Organs"
+	},
+	"list": {
+		"actions": {
+			"title": "Actions",
+			"details": "Details",
+			"edit": "Edit",
+			"delete": "Delete"
+		}
+	},
+	"form": {
+		"actions": {
+			"return": "Return",
+			"edit": "Edit",
+			"cancel": "Cancel"
+		}
+	},
+	"doctor": {
+		"fields": {
+			"name": "Name",
+			"dateJoin": "Date Join",
+			"dateLeave": "Date Leave"
+		},
+		"list": {
+			"title": "Doctors",
+			"addNew": "Add new doctor",
+			"noData": "No doctors in database",
+			"pageTitle": "List of doctors"
+		},
+		"form": {
+			"operations": "History of operations",
+			"add": {
+				"pageTitle": "Adding a new doctor",
+				"btnLabel": "Add doctor",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "The new doctor has been successfully created"
+				}
+			},
+			"edit": {
+				"pageTitle": "Editing a doctor",
+				"btnLabel": "Save changes",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "The doctor has been successfully updated"
+				}
+			},
+			"details": {
+				"pageTitle": "Doctor details"
+			}
+		}
+	},
+	"validationMessage": {
+		"invalidForm": "Form contains errors.",
+		"fieldRequired": "This field is required.",
+		"characterLimit": "This field has a character limit.",
+		"dateBeforeLanding": "Date cannot occur before landing date.",
+		"doctor": {
+			"dateLeaveBeforeJoin": "Date leave cannot happen earlier than Date join"
+		}
+	}
+}

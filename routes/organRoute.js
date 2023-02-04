@@ -4,8 +4,8 @@ const organController = require('../controllers/organController');
 
 router.get('/', organController.showOrganList);
 router.get('/add', organController.showAddOrganForm);
-router.get('/details/:idOrgan', organController.showOrganDetails); //TODO organId uncalled?
-router.get('/edit/:idOrgan', organController.showEditOrganForm); //TODO organId uncalled?
+router.get('/details/:idOrgan', organController.showOrganDetails);
+router.get('/edit/:idOrgan', organController.showEditOrganForm);
 
 router.post('/add', organController.addOrgan);
 router.post('/edit', organController.updateOrgan);

@@ -212,7 +212,7 @@ textarea {
     display: grid;
     grid-template-columns: 150px 300px 1fr;
     gap: 1rem;
-    margin-left: 2rem; /*who's rem*/ /*TODO do we keep this?*/
+    margin-left: 2rem; /*who's rem*/
     /*width: 300px;*/
 
 }
@@ -236,7 +236,7 @@ textarea {
 }
 
 .form-buttons {
-    margin-top: 2rem; /*still don't know who rem is*/ /*TODO do we keep this?*/
+    margin-top: 2rem; /*still don't know who rem is*/
     grid-column: 1 / span 2;
 }
 

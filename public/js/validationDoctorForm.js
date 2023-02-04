@@ -13,28 +13,34 @@ function validateForm() {
     const errorPassword = document.getElementById('errorPassword');
     const errorsSummary = document.getElementById('errorsSummary');
 
+    const reqMessageName = document.getElementById('errorName').innerText;
+    const reqMessageDateJoin = document.getElementById('errorDateJoin').innerText;
+    const reqMessageDateLeave = document.getElementById('errorDateLeave').innerText;
+    const reqMessagePassword = document.getElementById('errorPassword').innerText;
+    const reqMessageSummary = document.getElementById('errorsSummary').innerText
+
     resetErrors([nameInput, dateJoinInput, dateLeaveInput, passwordInput], [errorName, errorDateJoin, errorDateLeave,errorPassword], errorsSummary);
 
     //name validation
     if(!checkRequired(nameInput.value)) {
         valid = false;
         nameInput.classList.add("error-input");
-        errorName.innerText = "The field is required.";
+        errorName.innerText = reqMessageName;
     } else if(!checkTextLengthRange(nameInput.value,1,200)) {
         valid = false;
         nameInput.classList.add("error-input");
-        errorName.innerText = "This field should contain 1 to 200 characters.";
+        errorName.innerText = reqMessageName;
     }
 
     //dateJoin validation
     if(!checkRequired(dateJoinInput.value)) {
         valid = false;
         dateJoinInput.classList.add("error-input");
-        errorDateJoin.innerText = "The field is required.";
+        errorDateJoin.innerText = reqMessageDateJoin;
     } else if(!checkDateIfAfter(dateJoinInput.value, landingDate)) {
         valid = false;
         dateJoinInput.classList.add("error-input");
-        errorDateJoin.innerText = "Date join cannot be earlier than the landing date (" + landingDate + ")";
+        errorDateJoin.innerText = reqMessageDateJoin;
     }
 
     //dateLeave validation
@@ -43,11 +49,11 @@ function validateForm() {
         if(!checkDateIfAfter(dateLeaveInput.value, landingDate)) {
             valid = false;
             dateLeaveInput.classList.add("error-input");
-            errorDateLeave.innerText = "Date leave cannot be earlier than the landing date (" + landingDate + ")";
+            errorDateLeave.innerText = reqMessageDateLeave;
         } else if(!checkDateIfAfter(dateLeaveInput.value, dateJoinInput.value)) {
             valid = false;
             dateLeaveInput.classList.add("error-input");
-            errorDateLeave.innerText = "Date leave cannot be earlier than date join.";
+            errorDateLeave.innerText = reqMessageDateLeave;
         }
     }
 
@@ -55,16 +61,16 @@ function validateForm() {
     if(!checkRequired(passwordInput.value)) {
         valid = false;
         passwordInput.classList.add("error-input");
-        errorPassword.innerText = "The field is required.";
+        errorPassword.innerText = reqMessagePassword;
     } else if(!checkTextLengthRange(passwordInput.value,1,200)) {
         valid = false;
         passwordInput.classList.add("error-input");
-        errorPassword.innerText = "This field should contain 1 to 200 characters.";
+        errorPassword.innerText = reqMessagePassword;
     }
 
 
     if(!valid) {
-        errorsSummary.innerText = "Form contains errors.";
+        errorsSummary.innerText = reqMessageSummary;
     }
 
     return valid;

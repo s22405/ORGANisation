@@ -7,18 +7,18 @@
     <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm();">
         <input type="hidden" name="_id" value="<%= doctor._id %>">
 
-        <label for="name">Name: <span class="symbol-required">*</span></label> <!--TODO oh my fucking god I wrote "Name" instead of "name" and I don't know if it'll have consequences-->
+        <label for="name"><%= __('doctor.fields.name') %><span class="symbol-required">*</span></label> <!-- oh my fucking god I wrote "Name" instead of "name" and I don't know if it'll have consequences-->
         <input type="text" name="name" id="name" placeholder="1-200 characters" value="<%= doctor.name %>"<%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
         <span id="errorName" class="errors-text"></span>
         <!-- UPDATE: IT DID HAVE CONSEQUENCES! THAT WAS THE FUCKING BUG THAT I'VE BEEN TRYING TO FIND FOR 2 HOURS -->
 
-        <label for="dateJoin">DateJoin: <span class="symbol-required">*</span></label>
+        <label for="dateJoin"><%= __('doctor.fields.dateJoin') %><span class="symbol-required">*</span></label>
         <input type="date" name="dateJoin" id="dateJoin" value=
         "<%= doctor.dateJoin ? doctor.dateJoin.toISOString().split('T')[0] : '' %>"
         <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
         <span id="errorDateJoin" class="errors-text"></span>
 
-        <label for="dateLeave">DateLeave: </label>
+        <label for="dateLeave"><%= __('doctor.fields.dateLeave') %></label>
         <input type="date" name="dateLeave" id="dateLeave" value=
         "<%= doctor.dateLeave ? doctor.dateLeave.toISOString().split('T')[0] : '' %>"
         <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
@@ -32,24 +32,24 @@
 
         <% if(formMode == 'showDetails') { %>
             <div class="form-buttons"> <!-- labeled as "selection-buttons in the tutorial" -->
-                <a href="/doctors/edit/<%= doctor._id %>" class="form-button-edit">Edit</a>
+                <a href="/doctors/edit/<%= doctor._id %>" class="form-button-edit"><%= __('form.actions.edit') %></a>
             </div>
         <% } %>
 
         <div class="form-buttons">
-            <p id="errorsSummary" class="errors-text"></p>
+            <span id="errorsSummary" class="errors-text"><%=__('validationMessage.invalidForm')%></span>
             <% if (formMode != 'showDetails') { %>
                 <input class="form-button-submit" type="submit" value="<%=btnLabel%>"  />
-                <a class="form-button-cancel" href="/doctors">Cancel</a>
+                <a class="form-button-cancel" href="/doctors"><%= __('form.actions.cancel') %></a>
             <% } else { %>
-                <a class="form-button-cancel" href="/doctors">Return</a>
+                <a class="form-button-cancel" href="/doctors"><%= __('form.actions.return') %></a>
             <% } %>
         </div>
 
     </form>
 
     <% if(formMode == 'showDetails' || formMode == 'edit') { %>
-        <h2>Operation Details</h2>
+        <h2><%= __('doctor.form.operations') %></h2>
         <table class="table-list">
             <thead>
             <tr>

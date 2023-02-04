@@ -1,5 +1,5 @@
 function validateForm() {
-    let landingDate = "5500-04-05";
+    let landingDate = "5500-04-01";
     let valid = true;
 
     const nameInput = document.getElementById('name');
